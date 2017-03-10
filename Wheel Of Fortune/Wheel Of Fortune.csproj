@@ -102,7 +102,6 @@
     <Compile Include="Player.cs" />
     <Compile Include="PuzzleModel\Puzzle.cs" />
     <Compile Include="PuzzleModel\PuzzleFactory.cs" />
-    <Compile Include="TestClass.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="WheelModel\ColorArgs.cs" />
     <Compile Include="WheelModel\ColorChanger.cs" />
