@@ -1,0 +1,16 @@
+﻿<Window x:Class="Wheel_Of_Fortune.NewGame.NewGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wheel_Of_Fortune.NewGame"
+        mc:Ignorable="d"
+        Title="NewGame" Height="300" Width="342.661" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ListBox x:Name="NameListBox" HorizontalAlignment="Left" Height="144" Margin="21,97,0,0" VerticalAlignment="Top" Width="137" FontSize="18" KeyUp="NameListBox_KeyUp"/>
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="30" Margin="21,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" KeyUp="NameTextBox_KeyUp" FontSize="18"/>
+        <Button x:Name="AddButton" Content="Add" HorizontalAlignment="Left" Height="30" Margin="172,67,0,0" VerticalAlignment="Top" Width="142" Click="AddButton_Click" FontSize="18"/>
+        <Button x:Name="DeleteButton" Content="Delete Selected" HorizontalAlignment="Left" Height="30" Margin="172,102,-22,0" VerticalAlignment="Top" Width="142" Click="DeleteButton_Click" FontSize="18"/>
+        <Button x:Name="ContinueButton" Content="Continue" HorizontalAlignment="Left" Height="30" Margin="172,211,0,0" VerticalAlignment="Top" Width="142" FontSize="18" Click="ContinueButton_Click"/>
+    </Grid>
+</Window>
