@@ -50,6 +50,7 @@ namespace Wheel_Of_Fortune.Board {
             Game.PlayerChoice = PlayerChoice.SpinOnly;
 
             wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
+            BoardUI.ToggleUsedLetters(false);
         }
 
         private void InitPlayerTextBlocks() {
@@ -140,8 +141,12 @@ namespace Wheel_Of_Fortune.Board {
             if (CurrentThird.Type == ThirdType.Bankrupt) {
                 CurrentPlayer.RoundWinnings = 0;
                 GoToNextPlayer();
+                BoardUI.ToggleUsedLetters(false);
             } else if (CurrentThird.Type == ThirdType.LoseATurn) {
                 GoToNextPlayer();
+                BoardUI.ToggleUsedLetters(false);
+            } else {
+                BoardUI.ToggleUsedLetters(true);
             }
 
             ToggleButtons();

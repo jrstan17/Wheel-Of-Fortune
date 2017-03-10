@@ -53,13 +53,13 @@ namespace Wheel_Of_Fortune.Board {
 
         public void ToggleUsedLetters(bool enable) {
             if (enable) {
-                foreach(TextBlock block in LetterBlocks) {
+                foreach(TextBlock block in UsedLetterTextBlocks) {
                     if (!UsedLetters.Contains(block.Text[0])) {
                         block.IsEnabled = true;
                     }
                 }
             } else {
-                foreach (TextBlock block in LetterBlocks) {
+                foreach (TextBlock block in UsedLetterTextBlocks) {
                     block.IsEnabled = false;
                 }
             }
@@ -68,6 +68,7 @@ namespace Wheel_Of_Fortune.Board {
         public void NewPuzzle() {
             Board.NewBoard();
             ResetUsedLetters();
+            ToggleUsedLetters(false);
         }
 
         private void Board_BoardChanged(object sender, BoardEventArgs e) {
