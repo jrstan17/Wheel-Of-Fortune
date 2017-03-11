@@ -16,14 +16,14 @@ namespace Wheel_Of_Fortune.Board {
         const int BOARD_X_START = 17;
 
         internal Board Board;
-        BoardWindow Window;
-        Canvas BoardCanvas;
+        internal BoardWindow Window;
+        internal Canvas BoardCanvas;
         FontFamily family;
 
         List<Rectangle> TrilonScreens;
         List<TextBlock> LetterBlocks;
-        List<LetterTextBlock> UsedLetterTextBlocks;
-        List<char> UsedLetters = new List<char>();
+
+        internal UsedLetterBoard UsedLetterBoard;
 
         TextBlock CategoryText;
         TextBlock DateText;
@@ -37,38 +37,30 @@ namespace Wheel_Of_Fortune.Board {
             Window = window;
             BoardCanvas = Window.BoardCanvas;
             CurrentPlayer = Window.CurrentPlayer;
+            LetterBlocks = new List<TextBlock>();
 
             BoardCanvas.Width = 1050 + BOARD_X_START;
 
             TrilonScreens = new List<Rectangle>();
-            LetterBlocks = new List<TextBlock>();
+            UsedLetterBoard = new UsedLetterBoard();
+            
             family = new FontFamily(new Uri(@"C:\Users\JRStan17\Desktop\letters.ttf", UriKind.Absolute), "Arial");
 
-            Initialize();
             Board = new Board();
             Board.BoardChanged += Board_BoardChanged;
 
+            UsedLetterBoard.SetBoardUI(this);
+            Initialize();
             Board.NewBoard();
-        }
 
-        public void ToggleUsedLetters(bool enable) {
-            if (enable) {
-                foreach(TextBlock block in UsedLetterTextBlocks) {
-                    if (!UsedLetters.Contains(block.Text[0])) {
-                        block.IsEnabled = true;
-                    }
-                }
-            } else {
-                foreach (TextBlock block in UsedLetterTextBlocks) {
-                    block.IsEnabled = false;
-                }
-            }
+
         }
 
         public void NewPuzzle() {
             Board.NewBoard();
-            ResetUsedLetters();
-            ToggleUsedLetters(false);
+            Console.WriteLine("Puzzle Solution: " + Board.CurrentPuzzle.Text);
+            UsedLetterBoard.ResetUsedLetters();
+            UsedLetterBoard.DisableLetters(LetterType.Both, true);
         }
 
         private void Board_BoardChanged(object sender, BoardEventArgs e) {
@@ -76,13 +68,13 @@ namespace Wheel_Of_Fortune.Board {
             for(int i = 0; i < Update.Count; i++) {
                 if (Update[i].State == TrilonState.NotInUse) {
                     TrilonScreens[i].Fill = new SolidColorBrush(Colors.DarkGreen);
-                    LetterBlocks[i].Text = "";
+                    ChangeText(i, "");
                 } else if (Update[i].State == TrilonState.Unrevealed) {
                     TrilonScreens[i].Fill = new SolidColorBrush(Colors.White);
-                    LetterBlocks[i].Text = "";
+                    ChangeText(i, "");
                 } else if (Update[i].State == TrilonState.Revealed) {
                     TrilonScreens[i].Fill = new SolidColorBrush(Colors.White);
-                    LetterBlocks[i].Text = Update[i].Letter.ToString();
+                    ChangeText(i, Update[i].Letter.ToString());
                 }
             }
 
@@ -143,7 +135,7 @@ namespace Wheel_Of_Fortune.Board {
 
             CreateCategoryText(y + 83);
             CreateDateText(y + 93);
-            CreateUsedLetters();
+            UsedLetterBoard.CreateUsedLetters();
         }
 
         private void CreateCategoryText(double y) {
@@ -173,60 +165,6 @@ namespace Wheel_Of_Fortune.Board {
             DateText.TextAlignment = TextAlignment.Right;
             DateText.FontSize = 16;
             BoardCanvas.Children.Add(DateText);
-        }
-
-        private void CreateUsedLetters() {
-            double y = 385;
-            int letterBlockWidth = 42;
-            double x = (BoardCanvas.Width - letterBlockWidth * 26) / 2;
-
-            UsedLetterTextBlocks = new List<LetterTextBlock>();
-
-            for (int i = 0; i < 26; i++) {
-                LetterTextBlock letterBlock = new LetterTextBlock();
-                letterBlock.Width = letterBlockWidth;
-                letterBlock.Height = 45;
-                letterBlock.TextAlignment = TextAlignment.Center;
-                letterBlock.FontSize = 36;
-                letterBlock.FontWeight = FontWeights.ExtraBold;
-                Canvas.SetLeft(letterBlock, x);
-                Canvas.SetTop(letterBlock, y);
-
-                char letter = (char)(i + 65);
-                letterBlock.Letter = letter;
-                letterBlock.Text = letter.ToString();
-
-                UsedLetterTextBlocks.Add(letterBlock);
-                BoardCanvas.Children.Add(letterBlock);
-
-                x += letterBlock.Width;
-
-                letterBlock.MouseLeftButtonUp += Letter_MouseLeftButtonUp;
-            }
-        }
-
-        private void Letter_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            LetterTextBlock block = (LetterTextBlock)sender;
-            block.Foreground = new SolidColorBrush(Colors.LightGray);
-            BoardEventArgs args = Board.Reveal(block.Letter);
-            block.IsEnabled = false;
-            UsedLetters.Add(block.Letter);
-
-            if (args.TrilonsChanged == 0) {
-                Window.GoToNextPlayer();
-            }
-
-            Window.ToggleButtons();
-            ToggleUsedLetters(false);
-        }
-
-        private void ResetUsedLetters() {
-            foreach(LetterTextBlock block in UsedLetterTextBlocks) {
-                block.Foreground = new SolidColorBrush(Colors.Black);
-                block.IsEnabled = true;
-            }
-
-            UsedLetters.Clear();
         }
 
         private Grid CreateTrilonGrid(int x, int y) {
@@ -268,34 +206,8 @@ namespace Wheel_Of_Fortune.Board {
             return trilonGrid;
         }
 
-        public void ToggleUsedLettersForSpin() {
-            foreach(LetterTextBlock block in UsedLetterTextBlocks) {
-                if (block.IsVowel() || UsedLetters.Contains(block.Letter)) {
-                    block.Enable(false);
-                } else {
-                    block.Enable(true);
-                }
-            }
-        }
-
-        public void ToggleUsedLettersForBuyVowel() {
-            foreach (LetterTextBlock block in UsedLetterTextBlocks) {
-                if (!block.IsVowel() || UsedLetters.Contains(block.Letter)) {
-                    block.Enable(false);
-                } else {
-                    block.Enable(true);
-                }
-            }
-        }
-
-        public void ToggleAllAvailableLetters() {
-            foreach (LetterTextBlock block in UsedLetterTextBlocks) {
-                if (UsedLetters.Contains(block.Letter)) {
-                    block.Enable(false);
-                } else {
-                    block.Enable(true);
-                }
-            }
+        public void ChangeText(int index, string text) {
+            LetterBlocks[index].Text = text;
         }
     }
 }

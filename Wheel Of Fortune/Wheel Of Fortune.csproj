@@ -90,6 +90,8 @@
     <Compile Include="Board\Scoreboard.cs" />
     <Compile Include="Board\Row.cs" />
     <Compile Include="Board\Trilon.cs" />
+    <Compile Include="Board\UsedLetterBoard.cs" />
+    <Compile Include="Enums\LetterType.cs" />
     <Compile Include="Enums\PlayerChoice.cs" />
     <Compile Include="Enums\TrilonState.cs" />
     <Compile Include="Game.cs" />

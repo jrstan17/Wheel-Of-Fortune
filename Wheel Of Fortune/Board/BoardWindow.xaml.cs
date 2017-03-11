@@ -50,7 +50,6 @@ namespace Wheel_Of_Fortune.Board {
             Game.PlayerChoice = PlayerChoice.SpinOnly;
 
             wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
-            BoardUI.ToggleUsedLetters(false);
         }
 
         private void InitPlayerTextBlocks() {
@@ -98,6 +97,7 @@ namespace Wheel_Of_Fortune.Board {
 
         private void Game_OnPlayerChoiceChange(object sender, EventArgs e) {
             if (Game.PlayerChoice == PlayerChoice.SolveOnly) {
+                BoardUI.UsedLetterBoard.HardDisableLetters(LetterType.Both);
                 SpinButton.IsEnabled = false;
                 BuyButton.IsEnabled = false;
                 BuyButton.Foreground = SystemColors.ControlDarkBrush;
@@ -110,12 +110,18 @@ namespace Wheel_Of_Fortune.Board {
                 SolveButton.IsEnabled = true;
                 SolveButton.Foreground = SystemColors.ControlTextBrush;
             } else if (Game.PlayerChoice == PlayerChoice.SpinOnly) {
+                if (BoardUI.Board.OnlyConsonantsRemain()) {
+                    BoardUI.UsedLetterBoard.HardDisableLetters(LetterType.Vowel);
+                }                               
                 SpinButton.IsEnabled = true;
                 BuyButton.IsEnabled = false;
                 BuyButton.Foreground = SystemColors.ControlDarkBrush;
                 SolveButton.IsEnabled = true;
                 SolveButton.Foreground = SystemColors.ControlTextBrush;
             } else if (Game.PlayerChoice == PlayerChoice.VowelOnly) {
+                if (BoardUI.Board.OnlyVowelsRemain()) {
+                    BoardUI.UsedLetterBoard.HardDisableLetters(LetterType.Consonant);
+                }
                 SpinButton.IsEnabled = false;
                 BuyButton.IsEnabled = true;
                 BuyButton.Foreground = SystemColors.ControlTextBrush;
@@ -141,27 +147,24 @@ namespace Wheel_Of_Fortune.Board {
             if (CurrentThird.Type == ThirdType.Bankrupt) {
                 CurrentPlayer.RoundWinnings = 0;
                 GoToNextPlayer();
-                BoardUI.ToggleUsedLetters(false);
             } else if (CurrentThird.Type == ThirdType.LoseATurn) {
                 GoToNextPlayer();
-                BoardUI.ToggleUsedLetters(false);
             } else {
-                BoardUI.ToggleUsedLetters(true);
+                BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
             }
-
+            
             ToggleButtons();
         }
 
         private void SpinButton_Click(object sender, RoutedEventArgs e) {
             Game.PlayerChoice = PlayerChoice.Disabled;
-            BoardUI.ToggleUsedLettersForSpin();
-
+            BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
             wheelWindow.ShowDialog();                   
         }
 
         private void BuyButton_Click(object sender, RoutedEventArgs e) {
             Game.PlayerChoice = PlayerChoice.Disabled;
-            BoardUI.ToggleUsedLettersForBuyVowel();
+            BoardUI.UsedLetterBoard.DisableLetters(LetterType.Consonant, true);
             CurrentPlayer.RoundWinnings -= 250;            
         }
 
@@ -181,16 +184,26 @@ namespace Wheel_Of_Fortune.Board {
 
         public void ToggleButtons() {
             if (Game != null) {
-                if (CurrentPlayer.RoundWinnings >= 250) {
+                bool canBuy = (CurrentPlayer.RoundWinnings >= 250);
+
+                if (canBuy) {
                     Game.PlayerChoice = PlayerChoice.SpinAndBuy;
                 } else {
                     Game.PlayerChoice = PlayerChoice.SpinOnly;
                 }
 
                 if (BoardUI.Board.OnlyConsonantsRemain()) {
-                    Game.PlayerChoice = PlayerChoice.SpinOnly;
+                    if (canBuy) {
+                        Game.PlayerChoice = PlayerChoice.SpinOnly;
+                    } else {
+                        Game.PlayerChoice = PlayerChoice.SolveOnly;
+                    }
                 } else if (BoardUI.Board.OnlyVowelsRemain()) {
-                    Game.PlayerChoice = PlayerChoice.VowelOnly;
+                    if (canBuy) {
+                        Game.PlayerChoice = PlayerChoice.VowelOnly;
+                    } else {
+                        Game.PlayerChoice = PlayerChoice.SolveOnly;
+                    }
                 } else if (BoardUI.Board.IsBoardAllRevealed()) {
                     Game.PlayerChoice = PlayerChoice.SolveOnly;
                 }
@@ -208,6 +221,8 @@ namespace Wheel_Of_Fortune.Board {
 
             Scoreboard.RemoveActiveColors();
             Scoreboard.SetActiveColors(CurrentPlayer);
+
+            ToggleButtons();
         }
 
         private void Window_ContentRendered(object sender, EventArgs e) {
