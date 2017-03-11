@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wheel_Of_Fortune"
         mc:Ignorable="d"
-        Title="MainWindow" Height="836.365" Width="1281.375" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowInTaskbar="False" Background="Transparent" AllowsTransparency="True" WindowStyle="None" Loaded="Window_Loaded" ContentRendered="Window_ContentRendered" IsVisibleChanged="Window_IsVisibleChanged">
+        Title="MainWindow" Height="836.365" Width="1281.375" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True" WindowStyle="None" Loaded="Window_Loaded" ContentRendered="Window_ContentRendered" IsVisibleChanged="Window_IsVisibleChanged">
     <Canvas x:Name="canvas" Margin="10">
         <Canvas x:Name="WheelCanvas" Height="750" Canvas.Left="10" Canvas.Top="10" Width="1233" HorizontalAlignment="Left" VerticalAlignment="Top" ClipToBounds="True">
             <Button x:Name="RandomizeButton" Content="Random Seek" Height="75" Canvas.Left="1018" Canvas.Top="44" Width="178" Click="button_Click" Visibility="Hidden"/>

@@ -146,8 +146,10 @@ namespace Wheel_Of_Fortune.Board {
 
             if (CurrentThird.Type == ThirdType.Bankrupt) {
                 CurrentPlayer.RoundWinnings = 0;
+                BoardUI.UsedLetterBoard.DisableLetters(LetterType.Both, true);
                 GoToNextPlayer();
             } else if (CurrentThird.Type == ThirdType.LoseATurn) {
+                BoardUI.UsedLetterBoard.DisableLetters(LetterType.Both, true);
                 GoToNextPlayer();
             } else {
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);

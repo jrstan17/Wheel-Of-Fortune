@@ -198,15 +198,17 @@ namespace Wheel_Of_Fortune.WheelModel {
 
                 if (Wheel.MultipleWedgesInSpace(thirdUI.Third)) {
                     thirdUI.MouseLeftButtonUp += delegate (object sender, MouseButtonEventArgs e) {
-                        Wheel.RemoveWedgeWith(thirdUI.Third);
+                        if (CurrentThird.Equals(thirdUI.Third)) {
+                            Wheel.RemoveWedgeWith(thirdUI.Third);
 
-                        Clear();
-                        AddToCanvas();
-                        SetupMainWheelGrid();
-                        ToggleArrow(true);
+                            Clear();
+                            AddToCanvas();
+                            SetupMainWheelGrid();
+                            ToggleArrow(true);
 
-                        story.Begin();
-                        story.Pause();
+                            story.Begin();
+                            story.Pause();
+                        }
                     };
                 }
 

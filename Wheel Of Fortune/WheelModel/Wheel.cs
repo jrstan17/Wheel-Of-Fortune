@@ -202,10 +202,10 @@ namespace Wheel_Of_Fortune.WheelModel {
             list.Add(third.DeepCopy());
             wedge = new Wedge(list);
             space.Add(wedge.DeepCopy());            
-            third.Text = "BANKRUPT";
-            third.Value = 0;
-            third.Type = ThirdType.Bankrupt;
-            third.SetColor(WheelColors.WHITE, WheelColors.BLACK);
+            third.Text = "$500";
+            third.Value = 500;
+            third.Type = ThirdType.Regular;
+            third.SetColor(WheelColors.BLACK, WheelColors.PINK);
             wedge = new Wedge(third, 3);
             space.Add(wedge.DeepCopy());
             Spaces.Add(space);
@@ -252,9 +252,8 @@ namespace Wheel_Of_Fortune.WheelModel {
             wedge = new Wedge(third, 3);
             Spaces.Add(new Space(wedge.DeepCopy()));
 
-            space = new Space();
             third.Text = "FREE PLAY";
-            third.Value = 0;
+            third.Value = 500;
             third.Type = ThirdType.FreePlay;
             colorSetText.TopColor = Colors.Yellow;
             colorSetText.BottomColor = Colors.DarkBlue;
@@ -262,14 +261,7 @@ namespace Wheel_Of_Fortune.WheelModel {
             colorSetBack.BottomColor = Colors.Yellow;
             third.SetColor(colorSetText.DeepCopy(), colorSetBack.DeepCopy());
             wedge = new Wedge(third, 3);
-            space.Add(wedge.DeepCopy());
-            third.Text = "$500";
-            third.Value = 500;
-            third.Type = ThirdType.Regular;
-            third.SetColor(WheelColors.BLACK, WheelColors.ORANGE);
-            wedge = new Wedge(third, 3);
-            space.Add(wedge.DeepCopy());
-            Spaces.Add(space.DeepCopy());
+            Spaces.Add(new Space(wedge.DeepCopy()));
 
             third.Text = "$700";
             third.Value = 700;

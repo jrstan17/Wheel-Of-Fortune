@@ -52,8 +52,6 @@ namespace Wheel_Of_Fortune.Board {
             UsedLetterBoard.SetBoardUI(this);
             Initialize();
             Board.NewBoard();
-
-
         }
 
         public void NewPuzzle() {
