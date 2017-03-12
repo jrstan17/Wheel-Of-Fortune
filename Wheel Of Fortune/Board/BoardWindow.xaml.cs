@@ -52,7 +52,7 @@ namespace Wheel_Of_Fortune.Board {
 
             wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
 
-            NewGame_Click(null, null);
+            NewGame();
         }
 
         private void InitPlayerTextBlocks() {
@@ -68,7 +68,6 @@ namespace Wheel_Of_Fortune.Board {
                 TextBlock nameBlock = new TextBlock();
                 nameBlock.Text = Players[i].Name;
                 nameBlock.FontSize = 26;
-                nameBlock.Background = new SolidColorBrush(Colors.LightBlue);
                 nameBlock.HorizontalAlignment = HorizontalAlignment.Left;
                 nameBlock.VerticalAlignment = VerticalAlignment.Top;
                 nameBlock.TextAlignment = TextAlignment.Center;
@@ -78,32 +77,50 @@ namespace Wheel_Of_Fortune.Board {
 
                 y += nameBlock.Height;
 
-                TextBlock winningsBlock = new TextBlock();
-                winningsBlock.Text = "$" + Players[i].RoundWinnings.ToString();
-                winningsBlock.FontSize = 26;
-                winningsBlock.Background = new SolidColorBrush(Colors.LightBlue);
-                winningsBlock.HorizontalAlignment = HorizontalAlignment.Left;
-                winningsBlock.VerticalAlignment = VerticalAlignment.Top;
-                winningsBlock.TextAlignment = TextAlignment.Center;
-                winningsBlock.Width = 150;
-                winningsBlock.Height = 38;
-                winningsBlock.Margin = new Thickness(x, y, 0, 0);
+                TextBlock roundBlock = new TextBlock();
+                roundBlock.Text = "$" + Players[i].RoundWinnings.ToString();
+                roundBlock.FontSize = 26;
+                roundBlock.HorizontalAlignment = HorizontalAlignment.Left;
+                roundBlock.VerticalAlignment = VerticalAlignment.Top;
+                roundBlock.TextAlignment = TextAlignment.Center;
+                roundBlock.Width = 150;
+                roundBlock.Height = 38;
+                roundBlock.Margin = new Thickness(x, y, 0, 0);
+
+                y += nameBlock.Height;
+
+                TextBlock totalBlock = new TextBlock();
+                totalBlock.Text = "$" + Players[i].TotalWinnings.ToString();
+                totalBlock.FontSize = 12;
+                totalBlock.HorizontalAlignment = HorizontalAlignment.Left;
+                totalBlock.VerticalAlignment = VerticalAlignment.Top;
+                totalBlock.TextAlignment = TextAlignment.Center;
+                totalBlock.Width = 150;
+                totalBlock.Height = 38;
+                totalBlock.Margin = new Thickness(x, y, 0, 0);
 
                 x += PLAYER_BOARD_SPACING + PLAYER_BOARD_WIDTHS;
 
-                Scoreboard.Add(Players[i], nameBlock, winningsBlock);
+                Scoreboard.Add(Players[i], nameBlock, roundBlock, totalBlock);
 
                 MainGrid.Children.Add(nameBlock);
-                MainGrid.Children.Add(winningsBlock);                
+                MainGrid.Children.Add(roundBlock);
+                MainGrid.Children.Add(totalBlock);
             }
         }
 
         public void SolveResult(bool isWin) {
             if (isWin) {
-                //TODO
-            } else {
-                GoToNextPlayer();
+                if (CurrentPlayer.RoundWinnings < 1000) {
+                    CurrentPlayer.TotalWinnings += 1000;
+                } else {
+                    CurrentPlayer.TotalWinnings += CurrentPlayer.RoundWinnings;
+                }
+
+                NewGame();
             }
+
+            GoToNextPlayer();
         }
 
         private void Game_OnPlayerChoiceChange(object sender, EventArgs e) {
@@ -123,7 +140,7 @@ namespace Wheel_Of_Fortune.Board {
             } else if (Game.PlayerChoice == PlayerChoice.SpinOnly) {
                 if (BoardUI.Board.OnlyConsonantsRemain()) {
                     BoardUI.UsedLetterBoard.HardDisableLetters(LetterType.Vowel);
-                }                               
+                }
                 SpinButton.IsEnabled = true;
                 BuyButton.IsEnabled = false;
                 BuyButton.Foreground = SystemColors.ControlDarkBrush;
@@ -165,20 +182,20 @@ namespace Wheel_Of_Fortune.Board {
             } else {
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
             }
-            
+
             ToggleButtons();
         }
 
         private void SpinButton_Click(object sender, RoutedEventArgs e) {
             Game.PlayerChoice = PlayerChoice.Disabled;
             BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
-            wheelWindow.ShowDialog();                   
+            wheelWindow.ShowDialog();
         }
 
         private void BuyButton_Click(object sender, RoutedEventArgs e) {
             Game.PlayerChoice = PlayerChoice.Disabled;
             BoardUI.UsedLetterBoard.DisableLetters(LetterType.Consonant, true);
-            CurrentPlayer.RoundWinnings -= 250;            
+            CurrentPlayer.RoundWinnings -= 250;
         }
 
         private void Window_Closed(object sender, EventArgs e) {
@@ -192,10 +209,16 @@ namespace Wheel_Of_Fortune.Board {
         }
 
         private void NewGame_Click(object sender, RoutedEventArgs e) {
+            NewGame();
+        }
+
+        public void NewGame() {
             BoardUI.NewPuzzle();
 
 #if DEBUG
-            Console.WriteLine("Puzzle Solution: " + BoardUI.Board.CurrentPuzzle.Text);
+            if (MessageBox.Show("Show solution?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
+                MessageBox.Show(BoardUI.Board.CurrentPuzzle.Text, "Puzzle Solution", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
 #endif
 
             foreach (Player player in Players) {

@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using Wheel_Of_Fortune.Board;
 using Wheel_Of_Fortune.Countdown;
@@ -61,7 +51,7 @@ namespace Wheel_Of_Fortune.Solve {
 
             if (guess.Equals(Puzzle.Text)) {
                 IsAWin = true;
-                Close();
+                Wrong("You've Won!!!");
             } else {
                 IsAWin = false;
                 Wrong("That is incorrect.");
@@ -95,6 +85,8 @@ namespace Wheel_Of_Fortune.Solve {
             Close();
         }
 
+
+
         private void Timer_Tick(object sender, EventArgs e) {
             timerMech.UpdateTick(Timer.Interval.Milliseconds);
             TimerTextBlock.Text = timerMech.GetText();
@@ -108,6 +100,14 @@ namespace Wheel_Of_Fortune.Solve {
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             var hwnd = new WindowInteropHelper(this).Handle;
             SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
+
+            SolveTextBox.Focus();            
+        }
+
+        private void SolveTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e) {
+            if (e.Key == Key.Enter) {
+                SubmitButton_Click(null, null);
+            }
         }
     }
 }
