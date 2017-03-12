@@ -56,7 +56,6 @@ namespace Wheel_Of_Fortune.Board {
 
         public void NewPuzzle() {
             Board.NewBoard();
-            Console.WriteLine("Puzzle Solution: " + Board.CurrentPuzzle.Text);
             UsedLetterBoard.ResetUsedLetters();
             UsedLetterBoard.DisableLetters(LetterType.Both, true);
         }

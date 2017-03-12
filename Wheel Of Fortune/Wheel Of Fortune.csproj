@@ -95,6 +95,7 @@
     <Compile Include="Enums\PlayerChoice.cs" />
     <Compile Include="Enums\TrilonState.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Countdown\LargeTimerMechanic.cs" />
     <Compile Include="NewGame\NewGame.xaml.cs">
       <DependentUpon>NewGame.xaml</DependentUpon>
     </Compile>
@@ -104,6 +105,10 @@
     <Compile Include="Player.cs" />
     <Compile Include="PuzzleModel\Puzzle.cs" />
     <Compile Include="PuzzleModel\PuzzleFactory.cs" />
+    <Compile Include="Solve\SolveWindow.xaml.cs">
+      <DependentUpon>SolveWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Countdown\TimerMechanic.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="WheelModel\ColorArgs.cs" />
     <Compile Include="WheelModel\ColorChanger.cs" />
@@ -127,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewGame\RandomizeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Solve\SolveWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wheel_Of_Fortune.Enums;
+using Wheel_Of_Fortune.Solve;
 using Wheel_Of_Fortune.WheelModel;
 
 namespace Wheel_Of_Fortune.Board {
@@ -21,7 +22,7 @@ namespace Wheel_Of_Fortune.Board {
     public partial class BoardWindow : Window {
 
         internal Game Game;
-        BoardUI BoardUI;
+        internal BoardUI BoardUI;
         Third CurrentThird;
         MainWindow wheelWindow;
 
@@ -50,6 +51,8 @@ namespace Wheel_Of_Fortune.Board {
             Game.PlayerChoice = PlayerChoice.SpinOnly;
 
             wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
+
+            NewGame_Click(null, null);
         }
 
         private void InitPlayerTextBlocks() {
@@ -92,6 +95,14 @@ namespace Wheel_Of_Fortune.Board {
 
                 MainGrid.Children.Add(nameBlock);
                 MainGrid.Children.Add(winningsBlock);                
+            }
+        }
+
+        public void SolveResult(bool isWin) {
+            if (isWin) {
+                //TODO
+            } else {
+                GoToNextPlayer();
             }
         }
 
@@ -175,12 +186,22 @@ namespace Wheel_Of_Fortune.Board {
         }
 
         private void SolveButton_Click(object sender, RoutedEventArgs e) {
-            BoardUI.RevealAll();
             Game.PlayerChoice = PlayerChoice.Disabled;
+            SolveWindow window = new SolveWindow(this);
+            window.ShowDialog();
         }
 
         private void NewGame_Click(object sender, RoutedEventArgs e) {
             BoardUI.NewPuzzle();
+
+#if DEBUG
+            Console.WriteLine("Puzzle Solution: " + BoardUI.Board.CurrentPuzzle.Text);
+#endif
+
+            foreach (Player player in Players) {
+                player.RoundWinnings = 0;
+            }
+
             Game.PlayerChoice = PlayerChoice.SpinOnly;
         }
 
