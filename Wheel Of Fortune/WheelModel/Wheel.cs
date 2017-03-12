@@ -191,7 +191,7 @@ namespace Wheel_Of_Fortune.WheelModel {
             colorSetBack.TopColor = Colors.LimeGreen;
             colorSetBack.BottomColor = Colors.Black;
             third.Text = "ONE MILLION";
-            third.Value = 1000000;
+            third.Value = 500;
             third.Type = ThirdType.HighAmount;
             third.SetColor(colorSetText.DeepCopy(), colorSetBack.DeepCopy());
             list.Add(third.DeepCopy());
@@ -284,13 +284,9 @@ namespace Wheel_Of_Fortune.WheelModel {
             wedge = new Wedge(third, 3);
             Spaces.Add(new Space(wedge.DeepCopy()));
 
-            //ColorSet colorSetText = new ColorSet(Colors.Black, Colors.White);
-            //ColorSet colorSetBack = new ColorSet(Colors.LightGray, Colors.DarkGray);
-
-
             Space s = new Space();
             third.Text = "PRIZE";
-            third.Value = 0;
+            third.Value = 500;
             third.Type = ThirdType.Prize;
             colorSetText.TopColor = WheelColors.BLACK;
             colorSetText.BottomColor = Colors.White;
