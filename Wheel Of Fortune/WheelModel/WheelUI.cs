@@ -131,7 +131,10 @@ namespace Wheel_Of_Fortune.WheelModel {
                 Speed = 0;
                 story.Pause();
                 StopTimer.IsEnabled = false;
-                WaitTimer.IsEnabled = true;
+
+                if (!(CurrentThird.Type == ThirdType.Prize)) {
+                    WaitTimer.IsEnabled = true;
+                }
             }
         }
 
@@ -198,7 +201,11 @@ namespace Wheel_Of_Fortune.WheelModel {
 
                 if (Wheel.MultipleWedgesInSpace(thirdUI.Third)) {
                     thirdUI.MouseLeftButtonUp += delegate (object sender, MouseButtonEventArgs e) {
-                        if (CurrentThird.Equals(thirdUI.Third)) {
+                        if (CurrentThird.Equals(thirdUI.Third) && IsPaused) {
+                            WedgeClickedEventArgs args = new WedgeClickedEventArgs();
+                            args.Type = CurrentThird.Type;
+                            WedgeClicked(this, args);
+
                             Wheel.RemoveWedgeWith(thirdUI.Third);
 
                             Clear();
@@ -208,6 +215,8 @@ namespace Wheel_Of_Fortune.WheelModel {
 
                             story.Begin();
                             story.Pause();
+
+                            WaitTimer.IsEnabled = true;
                         }
                     };
                 }
@@ -231,7 +240,6 @@ namespace Wheel_Of_Fortune.WheelModel {
                 }
             }
         }
-
 
         public void ToggleArrow(bool enabled) {
             if (enabled) {
@@ -339,5 +347,14 @@ namespace Wheel_Of_Fortune.WheelModel {
         }
 
         public event EventHandler<WheelStoppedArgs> WheelStopped;
+
+        protected virtual void OnWedgeClicked(WedgeClickedEventArgs e) {
+            EventHandler<WedgeClickedEventArgs> handler = WedgeClicked;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<WedgeClickedEventArgs> WedgeClicked;
     }
 }

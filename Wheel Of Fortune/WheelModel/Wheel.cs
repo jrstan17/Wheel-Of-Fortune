@@ -192,7 +192,7 @@ namespace Wheel_Of_Fortune.WheelModel {
             colorSetBack.BottomColor = Colors.Black;
             third.Text = "ONE MILLION";
             third.Value = 500;
-            third.Type = ThirdType.HighAmount;
+            third.Type = ThirdType.Million;
             third.SetColor(colorSetText.DeepCopy(), colorSetBack.DeepCopy());
             list.Add(third.DeepCopy());
             third.Text = "BANKRUPT";

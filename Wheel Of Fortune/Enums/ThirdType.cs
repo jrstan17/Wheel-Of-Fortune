@@ -12,6 +12,7 @@ namespace Wheel_Of_Fortune.Enums {
         Bankrupt,
         LoseATurn,
         Prize,
-        FreePlay
+        FreePlay,
+        Million
     }
 }

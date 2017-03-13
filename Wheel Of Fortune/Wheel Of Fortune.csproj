@@ -105,6 +105,9 @@
     <Compile Include="Player.cs" />
     <Compile Include="Prizes\Prize.cs" />
     <Compile Include="Prizes\PrizeFactory.cs" />
+    <Compile Include="Prizes\PrizeWindow.xaml.cs">
+      <DependentUpon>PrizeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PuzzleModel\Puzzle.cs" />
     <Compile Include="PuzzleModel\PuzzleFactory.cs" />
     <Compile Include="Solve\SolveWindow.xaml.cs">
@@ -121,6 +124,7 @@
     <Compile Include="WheelModel\Third.cs" />
     <Compile Include="WheelModel\ThirdUI.cs" />
     <Compile Include="WheelModel\Wedge.cs" />
+    <Compile Include="WheelModel\WedgeClickedEventArgs.cs" />
     <Compile Include="WheelModel\Wheel.cs" />
     <Compile Include="WheelModel\WheelColors.cs" />
     <Compile Include="WheelModel\WheelStoppedArgs.cs" />
@@ -134,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewGame\RandomizeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prizes\PrizeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

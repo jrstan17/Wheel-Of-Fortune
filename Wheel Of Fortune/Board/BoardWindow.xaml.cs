@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wheel_Of_Fortune.Enums;
+using Wheel_Of_Fortune.NewGame;
+using Wheel_Of_Fortune.Prizes;
 using Wheel_Of_Fortune.Solve;
 using Wheel_Of_Fortune.WheelModel;
 
@@ -24,6 +26,10 @@ namespace Wheel_Of_Fortune.Board {
         internal Game Game;
         internal BoardUI BoardUI;
         Third CurrentThird;
+
+        internal Prize CurrentPrize;
+        internal PrizeFactory PrizeFactory = new PrizeFactory();
+
         MainWindow wheelWindow;
 
         const int PLAYER_BOARD_WIDTHS = 150;
@@ -44,15 +50,20 @@ namespace Wheel_Of_Fortune.Board {
             InitPlayerTextBlocks();
             GoToNextPlayer();
 
-            wheelWindow = new MainWindow();
             BoardUI = new BoardUI(this);
             Game = new Game();
             Game.OnPlayerChoiceChange += Game_OnPlayerChoiceChange;
             Game.PlayerChoice = PlayerChoice.SpinOnly;
 
-            wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
-
             NewGame();
+        }
+
+        private void WheelUI_WedgeClicked(object sender, WedgeClickedEventArgs e) {
+            if (e.Type == ThirdType.Prize) {
+                CurrentPlayer.WonPrizes.Add(CurrentPrize);
+            } else if (e.Type == ThirdType.Million){
+                CurrentPlayer.HasMillionWedge = true;
+            }
         }
 
         private void InitPlayerTextBlocks() {
@@ -174,6 +185,7 @@ namespace Wheel_Of_Fortune.Board {
 
             if (CurrentThird.Type == ThirdType.Bankrupt) {
                 CurrentPlayer.RoundWinnings = 0;
+                CurrentPlayer.HasMillionWedge = false;
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Both, true);
                 GoToNextPlayer();
             } else if (CurrentThird.Type == ThirdType.LoseATurn) {
@@ -213,7 +225,25 @@ namespace Wheel_Of_Fortune.Board {
         }
 
         public void NewGame() {
+            if (wheelWindow != null) {
+                wheelWindow.Close();
+            }
+
+            wheelWindow = new MainWindow();
+            wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
+            wheelWindow.WheelUI.WedgeClicked += WheelUI_WedgeClicked;
+
             BoardUI.NewPuzzle();
+
+            RandomizeWindow rndWindow = null;
+
+            foreach (Window w in Application.Current.Windows) {
+                if (w is RandomizeWindow) {
+                    rndWindow = (RandomizeWindow)w;
+                }
+            }
+
+            rndWindow.Show();
 
 #if DEBUG
             if (MessageBox.Show("Show solution?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Wheel_Of_Fortune.Board;
+using Wheel_Of_Fortune.Prizes;
 
 namespace Wheel_Of_Fortune.NewGame {
     /// <summary>
@@ -48,12 +49,12 @@ namespace Wheel_Of_Fortune.NewGame {
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e) {
-            BoardWindow board = new BoardWindow(GetPlayerList());
-            board.Show();
-            this.Close();
+            PrizeWindow window = new PrizeWindow();
+            this.Hide();
+            window.ShowDialog();            
         }
 
-        private List<Player> GetPlayerList() {
+        internal List<Player> GetPlayerList() {
             List<Player> players = new List<Player>();
 
             players.Add(new Player(Names[startingPlayer]));

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wheel_Of_Fortune.Prizes;
 
 namespace Wheel_Of_Fortune {
     class Player {
@@ -16,16 +17,17 @@ namespace Wheel_Of_Fortune {
             }
         }
         public int TotalWinnings { get; set; }
-        public bool HasPrize { get; set; }
+        public List<Prize> WonPrizes { get; set; }
         public int FreePlays { get; set; }
-
+        public bool HasMillionWedge { get; set; }
         public bool IsStartingPlayer { get; set; }
 
         public Player(string name) {
             Name = name;
             RoundWinnings = 0;
             TotalWinnings = 0;
-            HasPrize = false;
+            WonPrizes = new List<Prize>();
+            HasMillionWedge = false;
             FreePlays = 0;
             IsStartingPlayer = false;
         }
