@@ -66,7 +66,7 @@ namespace Wheel_Of_Fortune.Board {
                 UsedLetters.Add(block.Letter);
 
                 if (args.TrilonsChanged == 0) {
-                    Window.GoToNextPlayer();
+                    Window.AskFreePlayQuestion();
                 }
 
                 DisableLetters(LetterType.Both, true);

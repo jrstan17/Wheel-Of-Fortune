@@ -190,14 +190,27 @@ namespace Wheel_Of_Fortune.Board {
             if (CurrentThird.Type == ThirdType.Bankrupt) {
                 CurrentPlayer.RoundWinnings = 0;
                 CurrentPlayer.HasMillionWedge = false;
+                CurrentPlayer.FreePlays = 0;
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Both, true);
                 GoToNextPlayer();
             } else if (CurrentThird.Type == ThirdType.LoseATurn) {
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Both, true);
-                GoToNextPlayer();
+                AskFreePlayQuestion();
             } else {
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
                 Game.PlayerChoice = PlayerChoice.Disabled;
+            }
+        }
+
+        internal void AskFreePlayQuestion() {
+            if (CurrentPlayer.FreePlays > 0) {
+                if (MessageBox.Show("You have a Free Play! Would you like to use it now?", "Use Free Play?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
+                    CurrentPlayer.FreePlays--;
+                } else {
+                    GoToNextPlayer();
+                }
+            } else {
+                GoToNextPlayer();
             }
         }
 
