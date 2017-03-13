@@ -211,7 +211,7 @@ namespace Wheel_Of_Fortune.Board {
         }
 
         private void Window_Closed(object sender, EventArgs e) {
-            wheelWindow.Close();
+            Application.Current.Shutdown();
         }
 
         private void SolveButton_Click(object sender, RoutedEventArgs e) {
@@ -235,15 +235,19 @@ namespace Wheel_Of_Fortune.Board {
 
             BoardUI.NewPuzzle();
 
-            RandomizeWindow rndWindow = null;
+            PrizeWindow prizeWindow = null;
 
             foreach (Window w in Application.Current.Windows) {
-                if (w is RandomizeWindow) {
-                    rndWindow = (RandomizeWindow)w;
+                if (w is PrizeWindow) {
+                    prizeWindow = (PrizeWindow)w;
+                    break;
                 }
             }
 
-            rndWindow.Show();
+            if (prizeWindow != null) {
+                prizeWindow.Hide();
+                prizeWindow.ShowDialog();
+            }
 
 #if DEBUG
             if (MessageBox.Show("Show solution?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {

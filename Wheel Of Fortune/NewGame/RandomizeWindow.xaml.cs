@@ -49,9 +49,9 @@ namespace Wheel_Of_Fortune.NewGame {
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e) {
-            PrizeWindow window = new PrizeWindow();
-            this.Hide();
-            window.ShowDialog();            
+            PrizeWindow window = new PrizeWindow(GetPlayerList());
+            this.Close();
+            window.Show();            
         }
 
         internal List<Player> GetPlayerList() {

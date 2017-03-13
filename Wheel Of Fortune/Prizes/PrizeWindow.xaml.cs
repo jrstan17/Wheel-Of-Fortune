@@ -22,8 +22,10 @@ namespace Wheel_Of_Fortune.Prizes {
 
         RandomizeWindow rndWindow;
         BoardWindow board;
+        List<Player> Players;
 
-        public PrizeWindow() {
+        internal PrizeWindow(List<Player> players) {
+            Players = players;
             InitializeComponent();
         }
 
@@ -33,15 +35,7 @@ namespace Wheel_Of_Fortune.Prizes {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            RandomizeWindow rndWindow = null;
-
-            foreach (Window w in Application.Current.Windows) {
-                if (w is RandomizeWindow) {
-                    rndWindow = (RandomizeWindow)w;
-                }
-            }
-
-            board = new BoardWindow(rndWindow.GetPlayerList());
+            board = new BoardWindow(Players);
             RandomizePrize();
         }
 
