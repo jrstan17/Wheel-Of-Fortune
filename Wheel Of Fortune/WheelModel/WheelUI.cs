@@ -14,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Threading;
+using Wheel_Of_Fortune.Board;
 
 namespace Wheel_Of_Fortune.WheelModel {
     class WheelUI {
@@ -118,7 +119,7 @@ namespace Wheel_Of_Fortune.WheelModel {
             int index = (int)Angle / 5;
             CurrentThird = Wheel.GetThird(index);
 
-            Window.CurrentText.Text = CurrentThird.Text;         
+            Window.CurrentText.Text = CurrentThird.Text;
         }
 
         private void StopTimer_Tick(object sender, EventArgs e) {
@@ -134,6 +135,28 @@ namespace Wheel_Of_Fortune.WheelModel {
 
                 if (!(CurrentThird.Type == ThirdType.Prize)) {
                     WaitTimer.IsEnabled = true;
+                    if (CurrentThird.Type == ThirdType.Bankrupt) {
+                        Window.SajakText.FontSize = 26;
+                        Window.SajakText.Text = "\"Ouch! You've landed on Bankrupt. I'm sorry!\"";
+                    } else if (CurrentThird.Type == ThirdType.FreePlay) {
+                        Window.SajakText.FontSize = 18;
+                        Window.SajakText.Text = "\"That Free Play should come in handy! Use it anytime you get a buzzer sound! The current value is $500. Please choose a consonant.\"";
+                    } else if (CurrentThird.Type == ThirdType.HighAmount) {
+                        Window.SajakText.FontSize = 36;
+                        Window.SajakText.Text = "\"" + CurrentThird.Text + "! Now choose wisely!\"";
+                    } else if (CurrentThird.Type == ThirdType.LoseATurn) {
+                        Window.SajakText.FontSize = 26;
+                        Window.SajakText.Text = "\"So sorry, " + BoardWindow.CurrentPlayer.Name + ". You've lost your turn.\"";
+                    } else if (CurrentThird.Type == ThirdType.Million) {
+                        Window.SajakText.FontSize = 18;
+                        Window.SajakText.Text = "\"A Million Dollars!\"";
+                    } else if (CurrentThird.Type == ThirdType.Regular) {
+                        Window.SajakText.FontSize = 38;
+                        Window.SajakText.Text = "\"" + CurrentThird.Value + ".\"";
+                    }
+                } else {
+                    Window.SajakText.FontSize = 26;
+                    Window.SajakText.Text = "\"You've landed on the Prize! Click the Prize wedge to pick it up!\"";
                 }
             }
         }
@@ -168,7 +191,7 @@ namespace Wheel_Of_Fortune.WheelModel {
             story.SetSpeedRatio(Speed);
 
             story.Resume();
-
+            Window.SajakText.Text = "\"Good Luck!\"";
             IsPaused = false;
         }
 
@@ -211,10 +234,12 @@ namespace Wheel_Of_Fortune.WheelModel {
                             Clear();
                             AddToCanvas();
                             SetupMainWheelGrid();
-                            ToggleArrow(true);
+                            ToggleArrow(false);
 
                             story.Begin();
                             story.Pause();
+
+                            Window.SajakText.Text = "\"The current value is $500. Please choose a consonant.\"";
 
                             WaitTimer.IsEnabled = true;
                         }
@@ -244,7 +269,7 @@ namespace Wheel_Of_Fortune.WheelModel {
         public void ToggleArrow(bool enabled) {
             if (enabled) {
                 if (arrow != null) {
-                    WheelCanvas.Children.Remove(arrow);          
+                    WheelCanvas.Children.Remove(arrow);
                 }
 
                 arrow = SetNewArrowImage("arrow_enabled.png");

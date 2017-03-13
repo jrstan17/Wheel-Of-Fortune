@@ -36,7 +36,7 @@ namespace Wheel_Of_Fortune.Board {
         public BoardUI(BoardWindow window) {
             Window = window;
             BoardCanvas = Window.BoardCanvas;
-            CurrentPlayer = Window.CurrentPlayer;
+            CurrentPlayer = BoardWindow.CurrentPlayer;
             LetterBlocks = new List<TextBlock>();
 
             BoardCanvas.Width = 1050 + BOARD_X_START;

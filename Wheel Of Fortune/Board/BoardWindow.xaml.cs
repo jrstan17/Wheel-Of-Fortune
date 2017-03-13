@@ -38,7 +38,7 @@ namespace Wheel_Of_Fortune.Board {
         const int PLAYER_BOARD_START_Y = 480;
 
         internal List<Player> Players;
-        internal Player CurrentPlayer;
+        internal static Player CurrentPlayer;
         int currentPlayerIndex = -1;
 
         internal Scoreboard Scoreboard;

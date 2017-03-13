@@ -53,6 +53,8 @@ namespace Wheel_Of_Fortune {
 
         private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e) {
             WheelUI.ToggleArrow(true);
+            SajakText.FontSize = 26;
+            SajakText.Text = "\"Click the red arrow to spin the wheel!\"";
         }
     }
 }

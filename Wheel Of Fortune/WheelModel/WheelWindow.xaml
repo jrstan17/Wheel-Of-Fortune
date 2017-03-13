@@ -12,5 +12,6 @@
             <Button x:Name="CloseButton" Content="Close" Height="64" Canvas.Left="1006" Canvas.Top="646" Width="190" Click="CloseButton_Click" Visibility="Hidden"/>
         </Canvas>
         <TextBlock x:Name="CurrentText" Height="38" Canvas.Left="784" TextWrapping="Wrap" Text="Click Here To Spin!" Canvas.Top="370" Width="265" FontSize="24" FontWeight="Bold"/>
+        <TextBlock x:Name="SajakText" Height="178" Canvas.Left="259" TextWrapping="Wrap" Text="&quot;Click the red arrow to spin the wheel.&quot;" Canvas.Top="298" Width="246" FontSize="24" FontWeight="Bold" TextAlignment="Center" Foreground="White" Cursor="None"/>
     </Canvas>
 </Window>
