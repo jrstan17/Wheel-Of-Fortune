@@ -126,6 +126,10 @@ namespace Wheel_Of_Fortune.Board {
                     CurrentPlayer.TotalWinnings += 1000;
                 } else {
                     CurrentPlayer.TotalWinnings += CurrentPlayer.RoundWinnings;
+                    foreach(Prize prize in CurrentPlayer.WonPrizes) {
+                        CurrentPlayer.TotalWinnings += prize.Value;
+                    }
+                    CurrentPlayer.WonPrizes.Clear();
                 }
 
                 NewGame();
