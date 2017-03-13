@@ -7,11 +7,11 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace Wheel_Of_Fortune {
+namespace Wheel_Of_Fortune.WheelModel {
     public class ColorChanger {
 
         private int colorChangeTime = 0;
-
+        
         public object Dispatcher { get; private set; }
 
         Random rnd = new Random();

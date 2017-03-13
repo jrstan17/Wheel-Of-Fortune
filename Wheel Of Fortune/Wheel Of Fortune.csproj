@@ -103,6 +103,7 @@
       <DependentUpon>RandomizeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Player.cs" />
+    <Compile Include="Prizes\ColorChanger.cs" />
     <Compile Include="Prizes\Prize.cs" />
     <Compile Include="Prizes\PrizeFactory.cs" />
     <Compile Include="Prizes\PrizeWindow.xaml.cs">

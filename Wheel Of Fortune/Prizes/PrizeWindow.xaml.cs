@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Wheel_Of_Fortune.Board;
 using Wheel_Of_Fortune.NewGame;
 
@@ -21,10 +22,23 @@ namespace Wheel_Of_Fortune.Prizes {
     public partial class PrizeWindow : Window {
 
         BoardWindow Board;
+        ColorChanger Changer;
+        DispatcherTimer Timer;
 
         internal PrizeWindow(BoardWindow board) {
             Board = board;
+            Changer = new ColorChanger(50);
+
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromMilliseconds(10);
+            Timer.Tick += Timer_Tick;
+            Timer.IsEnabled = true;
+
             InitializeComponent();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e) {
+            PrizeValue.Foreground = new SolidColorBrush(Changer.tick());
         }
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e) {

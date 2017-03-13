@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Wheel_Of_Fortune;
 using Wheel_Of_Fortune.Enums;
+using Wheel_Of_Fortune.WheelModel;
 
 namespace Wheel_Of_Fortune {
     public class Third {
