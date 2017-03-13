@@ -235,19 +235,8 @@ namespace Wheel_Of_Fortune.Board {
 
             BoardUI.NewPuzzle();
 
-            PrizeWindow prizeWindow = null;
-
-            foreach (Window w in Application.Current.Windows) {
-                if (w is PrizeWindow) {
-                    prizeWindow = (PrizeWindow)w;
-                    break;
-                }
-            }
-
-            if (prizeWindow != null) {
-                prizeWindow.Hide();
-                prizeWindow.ShowDialog();
-            }
+            PrizeWindow prizeWindow = new PrizeWindow(this);
+            prizeWindow.ShowDialog();
 
 #if DEBUG
             if (MessageBox.Show("Show solution?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {

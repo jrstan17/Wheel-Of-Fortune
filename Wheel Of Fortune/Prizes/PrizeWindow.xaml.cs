@@ -20,36 +20,23 @@ namespace Wheel_Of_Fortune.Prizes {
     /// </summary>
     public partial class PrizeWindow : Window {
 
-        RandomizeWindow rndWindow;
-        BoardWindow board;
-        List<Player> Players;
+        BoardWindow Board;
 
-        internal PrizeWindow(List<Player> players) {
-            Players = players;
+        internal PrizeWindow(BoardWindow board) {
+            Board = board;
             InitializeComponent();
         }
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e) {
             this.Hide();
-            board.Show();
+            Board.Show();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            board = new BoardWindow(Players);
-            RandomizePrize();
-        }
+            Board.CurrentPrize = Board.PrizeFactory.GetRandom();
 
-        private void RandomizePrize() {
-            board.CurrentPrize = board.PrizeFactory.GetRandom();
-
-            PrizeText.Text = board.CurrentPrize.Text;
-            PrizeValue.Text = board.CurrentPrize.Value.ToString("$#,0");
-        }
-
-        private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e) {
-            if ((bool)e.NewValue && board != null) {
-                RandomizePrize();
-            }
+            PrizeText.Text = Board.CurrentPrize.Text;
+            PrizeValue.Text = Board.CurrentPrize.Value.ToString("$#,0");
         }
     }
 }
