@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wheel_Of_Fortune.Board"
         mc:Ignorable="d"
-        Title="BoardWindow" Height="732.694" Width="1211.309" Closed="Window_Closed" WindowStartupLocation="CenterScreen" ContentRendered="Window_ContentRendered">
+        Title="BoardWindow" Height="732.694" Width="1211.309" Closed="Window_Closed" WindowStartupLocation="CenterScreen">
 
     <Grid x:Name="MainGrid" Margin="0,0,0,0" Width="1203" Height="702">
         <Canvas x:Name="BoardCanvas" Cursor="Arrow" HorizontalAlignment="Left" Height="469" Margin="48,35,0,0" VerticalAlignment="Top" Width="1099" Panel.ZIndex="99"/>

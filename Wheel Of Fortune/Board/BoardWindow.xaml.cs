@@ -292,9 +292,5 @@ namespace Wheel_Of_Fortune.Board {
 
             ToggleButtons();
         }
-
-        private void Window_ContentRendered(object sender, EventArgs e) {
-
-        }
     }
 }

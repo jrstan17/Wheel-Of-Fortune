@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wheel_Of_Fortune.NewGame"
         mc:Ignorable="d"
-        Title="NewGame" Height="300" Width="342.661" WindowStartupLocation="CenterScreen">
+        Title="NewGame" Height="485.269" Width="520.281" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox x:Name="NameListBox" HorizontalAlignment="Left" Height="144" Margin="21,97,0,0" VerticalAlignment="Top" Width="137" FontSize="18" KeyUp="NameListBox_KeyUp"/>
-        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="30" Margin="21,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" KeyUp="NameTextBox_KeyUp" FontSize="18"/>
-        <Button x:Name="AddButton" Content="Add" HorizontalAlignment="Left" Height="30" Margin="172,67,0,0" VerticalAlignment="Top" Width="142" Click="AddButton_Click" FontSize="18"/>
-        <Button x:Name="DeleteButton" Content="Delete Selected" HorizontalAlignment="Left" Height="30" Margin="172,102,-22,0" VerticalAlignment="Top" Width="142" Click="DeleteButton_Click" FontSize="18"/>
-        <Button x:Name="ContinueButton" Content="Continue" HorizontalAlignment="Left" Height="30" Margin="172,211,0,0" VerticalAlignment="Top" Width="142" FontSize="18" Click="ContinueButton_Click"/>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="87,0,86,32">
+            <ListBox x:Name="NameListBox" HorizontalAlignment="Left" Height="144" Margin="0,30,0,0" VerticalAlignment="Top" Width="137" FontSize="18" KeyUp="NameListBox_KeyUp"/>
+            <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" KeyUp="NameTextBox_KeyUp" FontSize="18"/>
+            <Button x:Name="AddButton" Content="Add" HorizontalAlignment="Left" Height="30" Margin="151,0,0,0" VerticalAlignment="Top" Width="142" Click="AddButton_Click" FontSize="18"/>
+            <Button x:Name="DeleteButton" Content="Delete Selected" HorizontalAlignment="Left" Height="30" Margin="151,35,0,0" VerticalAlignment="Top" Width="142" Click="DeleteButton_Click" FontSize="18"/>
+            <Button x:Name="ContinueButton" Content="Continue" HorizontalAlignment="Left" Height="30" Margin="151,144,0,0" VerticalAlignment="Top" Width="142" FontSize="18" Click="ContinueButton_Click"/>
+        </Grid>
+        <Image x:Name="Image" HorizontalAlignment="Center" Height="193" VerticalAlignment="Top" Width="422" Source="pack://siteoforigin:,,,/NewGame/player_creation_screen.png" StretchDirection="DownOnly" Margin="22,10,22,0"/>
     </Grid>
 </Window>

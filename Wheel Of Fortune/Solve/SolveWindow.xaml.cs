@@ -52,6 +52,7 @@ namespace Wheel_Of_Fortune.Solve {
             if (guess.Equals(Puzzle.Text)) {
                 IsAWin = true;
                 Wrong("You've Won!!!");
+                Window.BoardUI.RevealAll();
             } else {
                 IsAWin = false;
                 Wrong("That is incorrect.");

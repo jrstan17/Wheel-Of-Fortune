@@ -22,8 +22,9 @@ namespace Wheel_Of_Fortune.PuzzleModel {
                 randomIndex = rnd.Next(0, Puzzles.Count);
             }
             previousPuzzleIndex = randomIndex;
-            
+
             return Puzzles[randomIndex];
+            //return new Puzzle("PLAYER CREATION SCREEN\tCategory\t10/16/2014", 1);
         }
 
         internal Puzzle NewPuzzle(int puzzleIndex) {
