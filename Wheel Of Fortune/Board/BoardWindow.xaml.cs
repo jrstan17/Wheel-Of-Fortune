@@ -193,9 +193,8 @@ namespace Wheel_Of_Fortune.Board {
                 GoToNextPlayer();
             } else {
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
+                Game.PlayerChoice = PlayerChoice.Disabled;
             }
-
-            ToggleButtons();
         }
 
         private void SpinButton_Click(object sender, RoutedEventArgs e) {
