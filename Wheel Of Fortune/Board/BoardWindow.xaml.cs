@@ -185,9 +185,8 @@ namespace Wheel_Of_Fortune.Board {
                 AskFreePlayQuestion();
                 ToggleButtons();
             } else if (CurrentThird.Type == ThirdType.FreePlay) {
-                BoardUI.UsedLetterBoard.DisableLetters(LetterType.Both, true);
+                BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
                 CurrentPlayer.FreePlays++;
-                ToggleButtons();
             } else {
                 if (CurrentThird.Type == ThirdType.Million) {
                     CurrentPlayer.HasMillionWedge = true;

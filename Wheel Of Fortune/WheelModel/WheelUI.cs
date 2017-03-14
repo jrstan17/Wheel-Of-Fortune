@@ -133,8 +133,8 @@ namespace Wheel_Of_Fortune.WheelModel {
                         Window.SajakText.FontSize = 26;
                         Window.SajakText.Text = "\"Ouch! You've landed on Bankrupt. I'm sorry!\"";
                     } else if (CurrentThird.Type == ThirdType.FreePlay) {
-                        Window.SajakText.FontSize = 18;
-                        Window.SajakText.Text = "\"That Free Play should come in handy! Use it anytime you get a buzzer sound! The current value is $500. Please choose a consonant.\"";
+                        Window.SajakText.FontSize = 24;
+                        Window.SajakText.Text = "\"You got a Free Play! The current value is $500. Please choose a consonant.\"";
                     } else if (CurrentThird.Type == ThirdType.HighAmount) {
                         Window.SajakText.FontSize = 36;
                         Window.SajakText.Text = "\"" + CurrentThird.Text + "! Now choose wisely!\"";
