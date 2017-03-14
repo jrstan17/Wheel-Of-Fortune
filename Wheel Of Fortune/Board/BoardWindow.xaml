@@ -17,7 +17,7 @@
         <Button x:Name="SolveButton" HorizontalAlignment="Left" Height="58" Margin="848,601,0,0" VerticalAlignment="Top" Width="149" FontSize="18" Click="SolveButton_Click">
             <TextBlock x:Name="SolveText" Height="51" TextWrapping="Wrap" Text="I'd Like To Solve The Puzzle" Width="128" FontSize="18" TextAlignment="Center"/>
         </Button>
-        <Menu x:Name="Menu" IsMainMenu="True" Height="17" VerticalAlignment="Top">
+        <Menu x:Name="Menu" IsMainMenu="True" VerticalAlignment="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_New Puzzle" Click="NewGame_Click" />
             </MenuItem>

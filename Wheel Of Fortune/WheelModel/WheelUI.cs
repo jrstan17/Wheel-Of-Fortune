@@ -59,8 +59,6 @@ namespace Wheel_Of_Fortune.WheelModel {
             WheelCanvas = Window.WheelCanvas;
 
 #if DEBUG
-            Window.CloseButton.Visibility = Visibility.Visible;
-
             WheelCanvas.MouseWheel += delegate (object sender, MouseWheelEventArgs e) {
                 TimeSpan current = story.GetCurrentTime();
 
@@ -70,11 +68,6 @@ namespace Wheel_Of_Fortune.WheelModel {
                     story.Seek(TimeSpan.FromTicks(ticks));
                     FrameTimer_Tick(null, null);
                 }
-
-                //TODO: Remove?
-                //WheelStoppedArgs args = new WheelStoppedArgs();
-                //args.CurrentThird = CurrentThird;
-                //OnWheelStopped(args);
             };
 #endif
 

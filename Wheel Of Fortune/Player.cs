@@ -35,10 +35,21 @@ namespace Wheel_Of_Fortune {
         }
 
         public void MoveWonPrizesToBank() {
-                foreach (Prize p in WonRoundPrizes) {
-                    WonTotalPrizes.Add(p.DeepCopy());
-                    WonRoundPrizes.Clear();
-                }
+            foreach (Prize p in WonRoundPrizes) {
+                WonTotalPrizes.Add(p.DeepCopy());
+            }
+
+            WonRoundPrizes.Clear();
+        }
+
+        public int CurrentRoundValue() {
+            int value = RoundWinnings;
+
+            foreach(Prize p in WonRoundPrizes) {
+                value += p.Value;
+            }
+
+            return value;
         }
 
         public event EventHandler RoundWinningChanged;

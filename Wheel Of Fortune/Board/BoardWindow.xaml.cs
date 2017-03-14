@@ -233,16 +233,13 @@ namespace Wheel_Of_Fortune.Board {
 
         public void SolveResult(bool isWin) {
             if (isWin) {
-                if (CurrentPlayer.RoundWinnings < 1000) {
+                if (CurrentPlayer.CurrentRoundValue() < 1000) {
                     CurrentPlayer.TotalWinnings += 1000;
                 } else {
-                    CurrentPlayer.TotalWinnings += CurrentPlayer.RoundWinnings;
-                    foreach (Prize prize in CurrentPlayer.WonRoundPrizes) {
-                        CurrentPlayer.TotalWinnings += prize.Value;
-                    }
-
-                    CurrentPlayer.MoveWonPrizesToBank();
+                    CurrentPlayer.TotalWinnings += CurrentPlayer.CurrentRoundValue();
                 }
+
+                CurrentPlayer.MoveWonPrizesToBank();
 
                 NewGame();
             }
