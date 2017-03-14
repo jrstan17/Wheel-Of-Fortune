@@ -46,6 +46,10 @@ namespace Wheel_Of_Fortune.Board {
         internal BoardWindow(List<Player> players) {
             InitializeComponent();
 
+#if !DEBUG
+            Menu.Items.Remove(DebugMenuItem);
+#endif
+
             Players = players;
             InitPlayerTextBlocks();
             GoToNextPlayer();
@@ -264,12 +268,6 @@ namespace Wheel_Of_Fortune.Board {
             PrizeWindow prizeWindow = new PrizeWindow(this);
             prizeWindow.ShowDialog();
 
-#if DEBUG
-            if (MessageBox.Show("Show solution?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
-                MessageBox.Show(BoardUI.Board.CurrentPuzzle.Text, "Puzzle Solution", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-#endif
-
             foreach (Player player in Players) {
                 player.RoundWinnings = 0;
             }
@@ -318,6 +316,10 @@ namespace Wheel_Of_Fortune.Board {
             Scoreboard.SetActiveColors(CurrentPlayer);
 
             ToggleButtons();
+        }
+
+        private void ShowSolution_Click(object sender, RoutedEventArgs e) {
+                MessageBox.Show(BoardUI.Board.CurrentPuzzle.Text, "Puzzle Solution", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

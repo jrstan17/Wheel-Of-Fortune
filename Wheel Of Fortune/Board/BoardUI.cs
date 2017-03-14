@@ -195,7 +195,7 @@ namespace Wheel_Of_Fortune.Board {
             trilonGrid.Children.Add(backRect);
             trilonGrid.Children.Add(borderRect);
             trilonGrid.Children.Add(trilonRect);
-            trilonGrid.Children.Add(letterBlock);
+            trilonGrid.Children.Add(letterBlock);            
 
             Canvas.SetLeft(trilonGrid, x);
             Canvas.SetTop(trilonGrid, y);
