@@ -60,7 +60,7 @@ namespace Wheel_Of_Fortune.Board {
 
         private void WheelUI_WedgeClicked(object sender, WedgeClickedEventArgs e) {
             if (e.Type == ThirdType.Prize) {
-                CurrentPlayer.WonPrizes.Add(CurrentPrize);
+                CurrentPlayer.WonRoundPrizes.Add(CurrentPrize);
             } else if (e.Type == ThirdType.Million) {
                 CurrentPlayer.HasMillionWedge = true;
             }
@@ -120,24 +120,6 @@ namespace Wheel_Of_Fortune.Board {
             }
         }
 
-        public void SolveResult(bool isWin) {
-            if (isWin) {
-                if (CurrentPlayer.RoundWinnings < 1000) {
-                    CurrentPlayer.TotalWinnings += 1000;
-                } else {
-                    CurrentPlayer.TotalWinnings += CurrentPlayer.RoundWinnings;
-                    foreach (Prize prize in CurrentPlayer.WonPrizes) {
-                        CurrentPlayer.TotalWinnings += prize.Value;
-                    }
-                    CurrentPlayer.WonPrizes.Clear();
-                }
-
-                NewGame();
-            }
-
-            GoToNextPlayer();
-        }
-
         private void Game_OnPlayerChoiceChange(object sender, EventArgs e) {
             if (Game.PlayerChoice == PlayerChoice.SolveOnly) {
                 BoardUI.UsedLetterBoard.HardDisableLetters(LetterType.Both);
@@ -191,6 +173,7 @@ namespace Wheel_Of_Fortune.Board {
                 CurrentPlayer.RoundWinnings = 0;
                 CurrentPlayer.HasMillionWedge = false;
                 CurrentPlayer.FreePlays = 0;
+                CurrentPlayer.WonRoundPrizes.Clear();
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Both, true);
                 GoToNextPlayer();
             } else if (CurrentThird.Type == ThirdType.LoseATurn) {
@@ -242,6 +225,25 @@ namespace Wheel_Of_Fortune.Board {
             Game.PlayerChoice = PlayerChoice.Disabled;
             SolveWindow window = new SolveWindow(this);
             window.ShowDialog();
+        }
+
+        public void SolveResult(bool isWin) {
+            if (isWin) {
+                if (CurrentPlayer.RoundWinnings < 1000) {
+                    CurrentPlayer.TotalWinnings += 1000;
+                } else {
+                    CurrentPlayer.TotalWinnings += CurrentPlayer.RoundWinnings;
+                    foreach (Prize prize in CurrentPlayer.WonRoundPrizes) {
+                        CurrentPlayer.TotalWinnings += prize.Value;
+                    }
+
+                    CurrentPlayer.MoveWonPrizesToBank();
+                }
+
+                NewGame();
+            }
+
+            GoToNextPlayer();
         }
 
         private void NewGame_Click(object sender, RoutedEventArgs e) {

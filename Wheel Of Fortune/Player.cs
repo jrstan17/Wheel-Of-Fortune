@@ -17,7 +17,8 @@ namespace Wheel_Of_Fortune {
             }
         }
         public int TotalWinnings { get; set; }
-        public List<Prize> WonPrizes { get; set; }
+        public List<Prize> WonRoundPrizes { get; set; }
+        public List<Prize> WonTotalPrizes { get; set; }
         public int FreePlays { get; set; }
         public bool HasMillionWedge { get; set; }
         public bool IsStartingPlayer { get; set; }
@@ -26,10 +27,18 @@ namespace Wheel_Of_Fortune {
             Name = name;
             RoundWinnings = 0;
             TotalWinnings = 0;
-            WonPrizes = new List<Prize>();
+            WonRoundPrizes = new List<Prize>();
+            WonTotalPrizes = new List<Prize>();
             HasMillionWedge = false;
             FreePlays = 0;
             IsStartingPlayer = false;
+        }
+
+        public void MoveWonPrizesToBank() {
+                foreach (Prize p in WonRoundPrizes) {
+                    WonTotalPrizes.Add(p.DeepCopy());
+                    WonRoundPrizes.Clear();
+                }
         }
 
         public event EventHandler RoundWinningChanged;

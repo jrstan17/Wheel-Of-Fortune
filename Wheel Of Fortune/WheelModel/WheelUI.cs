@@ -71,9 +71,9 @@ namespace Wheel_Of_Fortune.WheelModel {
                     FrameTimer_Tick(null, null);
                 }
 
-                WheelStoppedArgs args = new WheelStoppedArgs();
-                args.CurrentThird = CurrentThird;
-                OnWheelStopped(args);
+                //WheelStoppedArgs args = new WheelStoppedArgs();
+                //args.CurrentThird = CurrentThird;
+                //OnWheelStopped(args);
             };
 #endif
 

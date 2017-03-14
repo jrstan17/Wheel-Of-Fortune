@@ -9,6 +9,11 @@ namespace Wheel_Of_Fortune.Prizes {
         public string Text { get; set; }
         public int Value { get; }
 
+        private Prize(string text, int value) {
+            Text = text;
+            Value = value;
+        }
+
         public Prize(string line) {
             Random rnd = Utilities.rnd;
 
@@ -35,6 +40,10 @@ namespace Wheel_Of_Fortune.Prizes {
             }
 
             Value = (int)Math.Round(tempValue * percentage);
+        }
+
+        public Prize DeepCopy() {
+            return new Prize(Text, Value);
         }
     }
 }
