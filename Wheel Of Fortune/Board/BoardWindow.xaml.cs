@@ -61,7 +61,7 @@ namespace Wheel_Of_Fortune.Board {
         private void WheelUI_WedgeClicked(object sender, WedgeClickedEventArgs e) {
             if (e.Type == ThirdType.Prize) {
                 CurrentPlayer.WonPrizes.Add(CurrentPrize);
-            } else if (e.Type == ThirdType.Million){
+            } else if (e.Type == ThirdType.Million) {
                 CurrentPlayer.HasMillionWedge = true;
             }
         }
@@ -126,7 +126,7 @@ namespace Wheel_Of_Fortune.Board {
                     CurrentPlayer.TotalWinnings += 1000;
                 } else {
                     CurrentPlayer.TotalWinnings += CurrentPlayer.RoundWinnings;
-                    foreach(Prize prize in CurrentPlayer.WonPrizes) {
+                    foreach (Prize prize in CurrentPlayer.WonPrizes) {
                         CurrentPlayer.TotalWinnings += prize.Value;
                     }
                     CurrentPlayer.WonPrizes.Clear();
@@ -196,7 +196,15 @@ namespace Wheel_Of_Fortune.Board {
             } else if (CurrentThird.Type == ThirdType.LoseATurn) {
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Both, true);
                 AskFreePlayQuestion();
+                ToggleButtons();
+            } else if (CurrentThird.Type == ThirdType.FreePlay) {
+                BoardUI.UsedLetterBoard.DisableLetters(LetterType.Both, true);
+                CurrentPlayer.FreePlays++;
+                ToggleButtons();
             } else {
+                if (CurrentThird.Type == ThirdType.Million) {
+                    CurrentPlayer.HasMillionWedge = true;
+                }
                 BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
                 Game.PlayerChoice = PlayerChoice.Disabled;
             }
