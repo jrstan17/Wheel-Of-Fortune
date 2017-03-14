@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wheel_Of_Fortune.Prizes"
         mc:Ignorable="d"
-        Title="PrizeWindow" Height="407.932" Width="270.255" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowInTaskbar="False" Loaded="Window_Loaded">
+        Title="PrizeWindow" Height="423.732" Width="311.192" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowInTaskbar="False" Loaded="Window_Loaded">
     <Grid>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="78" TextWrapping="Wrap" Text="This Round's Prize Wedge Contains" VerticalAlignment="Top" Width="244" FontSize="26" TextAlignment="Center" Margin="12,13,0,0"/>
-        <TextBlock x:Name="PrizeText" HorizontalAlignment="Left" Height="98" TextWrapping="Wrap" Text="A Sony Big Screen TV" VerticalAlignment="Top" Width="242" FontSize="22" TextAlignment="Center" Margin="12,104,0,0" FontWeight="Bold"/>
-        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Center" Height="31" TextWrapping="Wrap" Text="A Prize Valued At" VerticalAlignment="Top" Width="226" FontSize="26" TextAlignment="Center" Margin="19,217,19,0"/>
-        <TextBlock x:Name="PrizeValue" HorizontalAlignment="Center" Height="55" TextWrapping="Wrap" Text="$XX,XXX" VerticalAlignment="Top" Width="184" FontSize="36" TextAlignment="Center" Margin="40,245,40,0" FontWeight="Bold"/>
-        <Button x:Name="ContinueButton" Content="Continue" HorizontalAlignment="Center" Height="40" Margin="50,0,50,17" VerticalAlignment="Bottom" Width="164" FontSize="18" Click="ContinueButton_Click"/>
+        <Grid Margin="30,13,31,92" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="78" TextWrapping="Wrap" Text="This Round's Prize Wedge Contains" VerticalAlignment="Top" Width="244" FontSize="26" TextAlignment="Center"/>
+            <TextBlock x:Name="PrizeText" HorizontalAlignment="Left" Height="98" TextWrapping="Wrap" Text="A Sony Big Screen TV" VerticalAlignment="Top" Width="242" FontSize="22" TextAlignment="Center" Margin="2,90,0,0" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Center" Height="31" TextWrapping="Wrap" Text="A Prize Valued At" VerticalAlignment="Top" Width="226" FontSize="26" TextAlignment="Center" Margin="9,204,9,0"/>
+            <TextBlock x:Name="PrizeValue" HorizontalAlignment="Center" Height="55" TextWrapping="Wrap" Text="$XX,XXX" VerticalAlignment="Top" Width="184" FontSize="36" TextAlignment="Center" Margin="32,235,28,0" FontWeight="Bold"/>
+        </Grid>
+        <Button x:Name="ContinueButton" Content="Continue" HorizontalAlignment="Center" Height="40" VerticalAlignment="Bottom" Width="164" FontSize="18" Click="ContinueButton_Click" Margin="70,0,71,36"/>
 
     </Grid>
 </Window>
