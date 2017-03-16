@@ -111,6 +111,9 @@
     </Compile>
     <Compile Include="PuzzleModel\Puzzle.cs" />
     <Compile Include="PuzzleModel\PuzzleFactory.cs" />
+    <Compile Include="Solve\RoundOverWindow.xaml.cs">
+      <DependentUpon>RoundOverWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Solve\SolveWindow.xaml.cs">
       <DependentUpon>SolveWindow.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prizes\PrizeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Solve\RoundOverWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

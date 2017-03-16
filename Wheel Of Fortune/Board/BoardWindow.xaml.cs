@@ -27,6 +27,8 @@ namespace Wheel_Of_Fortune.Board {
         internal BoardUI BoardUI;
         Third CurrentThird;
 
+        internal int CurrentRound { get; set; }
+
         internal Prize CurrentPrize;
         internal PrizeFactory PrizeFactory = new PrizeFactory();
 
@@ -45,6 +47,7 @@ namespace Wheel_Of_Fortune.Board {
 
         internal BoardWindow(List<Player> players) {
             InitializeComponent();
+            CurrentRound = 0;
 
 #if !DEBUG
             Menu.Items.Remove(DebugMenuItem);
@@ -259,6 +262,7 @@ namespace Wheel_Of_Fortune.Board {
             wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
             wheelWindow.WheelUI.WedgeClicked += WheelUI_WedgeClicked;
 
+            CurrentRound++;
             BoardUI.NewPuzzle();
 
             PrizeWindow prizeWindow = new PrizeWindow(this);

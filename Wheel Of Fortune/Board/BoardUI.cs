@@ -81,7 +81,7 @@ namespace Wheel_Of_Fortune.Board {
                 }
             }
 
-            CategoryText.Text = Board.CurrentPuzzle.Category;
+            CategoryText.Text = Board.CurrentPuzzle.Category + "\t" + "Round " + Window.CurrentRound;
             DateText.Text = "Puzzle Date:  " + (String.Format("{0:MMMM d, yyyy}", Board.CurrentPuzzle.Airdate) + "  (#" + Board.CurrentPuzzle.Number + ")");
         }
 

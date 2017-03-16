@@ -27,7 +27,6 @@ namespace Wheel_Of_Fortune.Solve {
         Puzzle Puzzle;
         TimerMechanic timerMech;
         DispatcherTimer Timer;
-        public bool IsAWin = false;
 
         public SolveWindow(BoardWindow window) {
             InitializeComponent();
@@ -49,12 +48,12 @@ namespace Wheel_Of_Fortune.Solve {
 
             string guess = SolveTextBox.Text.ToUpper();
 
-            if (guess.Equals(Puzzle.Text)) {
-                IsAWin = true;
-                Wrong("You've Won!!!");
+            if (guess.Equals(Puzzle.Text)) {                
                 Window.BoardUI.RevealAll();
+                RoundOverWindow roundWindow = new RoundOverWindow();
+                roundWindow.ShowDialog();
+                this.Close();
             } else {
-                IsAWin = false;
                 Wrong("That is incorrect.");
             }
         }
