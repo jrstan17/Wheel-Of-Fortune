@@ -238,7 +238,7 @@ namespace Wheel_Of_Fortune.Board {
             if (e.IsWin) {
                 SolveWindow solveWindow = (SolveWindow)sender;
                 solveWindow.Close();
-                RoundOverWindow roundWindow = new RoundOverWindow();
+                RoundOverWindow roundWindow = new RoundOverWindow(this);
                 roundWindow.ShowDialog();
             }
         }
