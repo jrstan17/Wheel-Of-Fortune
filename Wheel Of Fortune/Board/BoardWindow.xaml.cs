@@ -230,7 +230,17 @@ namespace Wheel_Of_Fortune.Board {
         private void SolveButton_Click(object sender, RoutedEventArgs e) {
             Game.PlayerChoice = PlayerChoice.Disabled;
             SolveWindow window = new SolveWindow(this);
+            window.SolveResult += Window_SolveResult;
             window.ShowDialog();
+        }
+
+        private void Window_SolveResult(object sender, SolveResultEventArgs e) {            
+            if (e.IsWin) {
+                SolveWindow solveWindow = (SolveWindow)sender;
+                solveWindow.Close();
+                RoundOverWindow roundWindow = new RoundOverWindow();
+                roundWindow.ShowDialog();
+            }
         }
 
         public void SolveResult(bool isWin) {

@@ -114,6 +114,7 @@
     <Compile Include="Solve\RoundOverWindow.xaml.cs">
       <DependentUpon>RoundOverWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Solve\SolveResultEventArgs.cs" />
     <Compile Include="Solve\SolveWindow.xaml.cs">
       <DependentUpon>SolveWindow.xaml</DependentUpon>
     </Compile>

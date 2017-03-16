@@ -47,14 +47,16 @@ namespace Wheel_Of_Fortune.Solve {
             Timer.IsEnabled = false;
 
             string guess = SolveTextBox.Text.ToUpper();
+            SolveResultEventArgs args = new SolveResultEventArgs();
 
-            if (guess.Equals(Puzzle.Text)) {                
+            if (guess.Equals(Puzzle.Text)) {
+                args.IsWin = true;              
                 Window.BoardUI.RevealAll();
-                RoundOverWindow roundWindow = new RoundOverWindow();
-                roundWindow.ShowDialog();
-                this.Close();
+                SolveResult(this, args);
             } else {
+                args.IsWin = false;
                 Wrong("That is incorrect.");
+                SolveResult(this, args);
             }
         }
 
@@ -109,5 +111,14 @@ namespace Wheel_Of_Fortune.Solve {
                 SubmitButton_Click(null, null);
             }
         }
+
+        public virtual void OnSolveResult(SolveResultEventArgs e) {
+            EventHandler<SolveResultEventArgs> handler = SolveResult;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<SolveResultEventArgs> SolveResult;
     }
 }
