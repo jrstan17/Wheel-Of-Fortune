@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wheel_Of_Fortune.Board;
+using Wheel_Of_Fortune.Prizes;
 
 namespace Wheel_Of_Fortune.Solve {
     /// <summary>
@@ -27,9 +28,14 @@ namespace Wheel_Of_Fortune.Solve {
 
             int currentRound = Board.CurrentRound;
 
+            foreach(Player p in Board.Players) {
+                p.WonRoundPrizes = new List<Prize>();
+            }
+
             NameText.Text = BoardWindow.CurrentPlayer.Name;
             CurrentRoundText.Text = "You've Won Round " + currentRound + "!";
             RoundWinningsText.Text = BoardWindow.CurrentPlayer.RoundWinnings.ToString("C0");
+            NextRoundText.Text = "Onto Round " + (currentRound + 1) + "!";
         }
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e) {

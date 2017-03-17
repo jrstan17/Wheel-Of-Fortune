@@ -284,6 +284,7 @@ namespace Wheel_Of_Fortune.Board {
 
             foreach (Player player in Players) {
                 player.RoundWinnings = 0;
+                player.FreePlays = 0;
             }
 
             Game.PlayerChoice = PlayerChoice.SpinOnly;
