@@ -27,13 +27,15 @@ namespace Wheel_Of_Fortune.Solve {
 
             int currentRound = Board.CurrentRound;
 
-            NameText.Text = Board.BoardUI.CurrentPlayer.Name;
+            NameText.Text = BoardWindow.CurrentPlayer.Name;
             CurrentRoundText.Text = "You've Won Round " + currentRound + "!";
-            RoundWinningsText.Text = Board.BoardUI.CurrentPlayer.RoundWinnings.ToString("C0");
+            RoundWinningsText.Text = BoardWindow.CurrentPlayer.RoundWinnings.ToString("C0");
         }
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e) {
-
+            this.Hide();
+            Board.NewGame();
+            this.Close();
         }
     }
 }

@@ -238,21 +238,25 @@ namespace Wheel_Of_Fortune.Board {
             if (e.IsWin) {
                 SolveWindow solveWindow = (SolveWindow)sender;
                 solveWindow.Close();
+                CollectCurrentPlayersWinnings();
                 RoundOverWindow roundWindow = new RoundOverWindow(this);
                 roundWindow.ShowDialog();
             }
         }
 
+        public void CollectCurrentPlayersWinnings() {
+            CurrentPlayer.MoveWonPrizesToBank();
+
+            if (CurrentPlayer.CurrentRoundValue() < 1000) {
+                CurrentPlayer.TotalWinnings += 1000;
+            } else {
+                CurrentPlayer.TotalWinnings += CurrentPlayer.CurrentRoundValue();
+            }            
+        }
+
         public void SolveResult(bool isWin) {
             if (isWin) {
-                if (CurrentPlayer.CurrentRoundValue() < 1000) {
-                    CurrentPlayer.TotalWinnings += 1000;
-                } else {
-                    CurrentPlayer.TotalWinnings += CurrentPlayer.CurrentRoundValue();
-                }
-
-                CurrentPlayer.MoveWonPrizesToBank();
-
+                CollectCurrentPlayersWinnings();
                 NewGame();
             }
 

@@ -5,23 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wheel_Of_Fortune.Solve"
         mc:Ignorable="d"
-        Title="RoundOverWindow" Height="431.799" Width="410.034" WindowStartupLocation="CenterScreen">
+        Title="RoundOverWindow" Height="446.735" Width="410.034" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock x:Name="NameText" HorizontalAlignment="Center" Height="37" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="267" FontSize="26" Foreground="#FF007C00" TextAlignment="Center" FontWeight="Bold"/>
-        <TextBlock x:Name="CurrentRoundText" HorizontalAlignment="Center" Height="37" TextWrapping="Wrap" Text="You've Won Round 1" VerticalAlignment="Top" Width="267" FontSize="26" Foreground="#FF007C00" Margin="0,37,0,0" TextAlignment="Center" FontWeight="Bold"/>
-        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Center" Height="80" TextWrapping="Wrap" Text="With Round Winnings Worth" VerticalAlignment="Top" Width="238" FontSize="26" Foreground="Black" Margin="82,111,82,0" TextAlignment="Center"/>
-        <TextBlock x:Name="RoundWinningsText" HorizontalAlignment="Center" Height="52" TextWrapping="Wrap" Text="$XX,XXX" VerticalAlignment="Top" Width="266" FontSize="36" Foreground="#FF7C0000" Margin="68,181,68,0" TextAlignment="Center" FontWeight="Bold"/>
-        <TextBlock x:Name="NextRoundText" HorizontalAlignment="Center" Height="37" TextWrapping="Wrap" Text="Onto Round 2!" VerticalAlignment="Bottom" Width="266" FontSize="26" Foreground="Black" Margin="30,0,30,68" TextAlignment="Center"/>
-        <Button x:Name="ContinueButton" Content="Continue" HorizontalAlignment="Center" Height="36" Margin="84,0,84,27" VerticalAlignment="Bottom" Width="158" FontSize="18" Click="ContinueButton_Click" RenderTransformOrigin="0.5,0.5">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.257"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-
+        <TextBlock x:Name="NameText" HorizontalAlignment="Center" Height="37" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="267" FontSize="26" Foreground="#FF007C00" TextAlignment="Center" FontWeight="Bold" Margin="69,23,66,0"/>
+        <TextBlock x:Name="CurrentRoundText" HorizontalAlignment="Center" Height="37" TextWrapping="Wrap" Text="You've Won Round 1" VerticalAlignment="Top" Width="267" FontSize="26" Foreground="#FF007C00" Margin="69,60,66,0" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Center" Height="80" TextWrapping="Wrap" Text="With Round Winnings Worth" VerticalAlignment="Top" Width="238" FontSize="26" Foreground="Black" Margin="83,134,81,0" TextAlignment="Center"/>
+        <TextBlock x:Name="RoundWinningsText" HorizontalAlignment="Center" Height="52" TextWrapping="Wrap" Text="$XX,XXX" VerticalAlignment="Top" Width="266" FontSize="36" Foreground="#FF7C0000" Margin="69,204,67,0" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="NextRoundText" HorizontalAlignment="Center" Height="37" TextWrapping="Wrap" Text="Onto Round 2!" VerticalAlignment="Bottom" Width="266" FontSize="26" Foreground="Black" Margin="68,0,68,86" TextAlignment="Center"/>
+        <Button x:Name="ContinueButton" Content="Continue" HorizontalAlignment="Center" Height="36" Margin="122,0,122,45" VerticalAlignment="Bottom" Width="158" FontSize="18" Click="ContinueButton_Click" RenderTransformOrigin="0.5,0.5" IsDefault="True"/>
     </Grid>
 </Window>
