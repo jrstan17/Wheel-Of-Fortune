@@ -245,13 +245,17 @@ namespace Wheel_Of_Fortune.Board {
         }
 
         public void CollectCurrentPlayersWinnings() {
-            CurrentPlayer.MoveWonPrizesToBank();
+            int roundWinnings = CurrentPlayer.CurrentRoundValue();
 
-            if (CurrentPlayer.CurrentRoundValue() < 1000) {
+            if (roundWinnings < 1000) {
+                CurrentPlayer.RoundWinnings = 1000;
                 CurrentPlayer.TotalWinnings += 1000;
             } else {
-                CurrentPlayer.TotalWinnings += CurrentPlayer.CurrentRoundValue();
-            }            
+                CurrentPlayer.RoundWinnings = roundWinnings;
+                CurrentPlayer.TotalWinnings += roundWinnings;
+            }
+
+            CurrentPlayer.MoveWonPrizesToBank();
         }
 
         public void SolveResult(bool isWin) {

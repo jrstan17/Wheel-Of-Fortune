@@ -69,6 +69,11 @@ namespace Wheel_Of_Fortune.WheelModel {
                     FrameTimer_Tick(null, null);
                 }
             };
+
+            WheelCanvas.MouseRightButtonUp += delegate (object sender, MouseButtonEventArgs e) {
+                    story.Seek(TimeSpan.FromTicks(481080858));
+                    FrameTimer_Tick(null, null);
+            };
 #endif
 
             AddToCanvas();

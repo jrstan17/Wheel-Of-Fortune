@@ -36,8 +36,6 @@ namespace Wheel_Of_Fortune {
 
         public void MoveWonPrizesToBank() {
             foreach (Prize p in WonRoundPrizes) {
-                RoundWinnings += p.Value;
-                TotalWinnings += p.Value;
                 WonTotalPrizes.Add(p.DeepCopy());
             }
 
