@@ -31,6 +31,7 @@ namespace Wheel_Of_Fortune.NewGame {
         public RandomizeWindow(List<string> names) {
             InitializeComponent();
             Names = names;
+            NameText.Text = Names[0];
 
             DescriptText.Text = "The dice is rolling... Who is going to be first?";
             StartButton.IsEnabled = false;
@@ -82,6 +83,8 @@ namespace Wheel_Of_Fortune.NewGame {
             while (randomIndex == previous) {
                 randomIndex = rnd.Next(0, Names.Count);
             }
+
+            previous = randomIndex;
 
             NameText.Text = Names[randomIndex];
             startingPlayer = randomIndex;
