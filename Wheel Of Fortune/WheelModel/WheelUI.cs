@@ -15,10 +15,11 @@ using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Threading;
 using Wheel_Of_Fortune.Board;
+using Wheel_Of_Fortune.WheelModel.Wheels;
 
 namespace Wheel_Of_Fortune.WheelModel {
     class WheelUI {
-        Wheel Wheel;
+        internal Wheel Wheel;
         Third CurrentThird;
         Canvas WheelCanvas;
         Grid MainWheelGrid;
@@ -36,7 +37,7 @@ namespace Wheel_Of_Fortune.WheelModel {
         Image arrow;
 
         public WheelUI(MainWindow Window) {
-            Wheel = new Wheel();
+            Wheel = GetAppropriateWheel(BoardWindow.CurrentRound);
             story = new Storyboard();
             FrameTimer = new DispatcherTimer();
             WaitTimer = new DispatcherTimer();
@@ -70,10 +71,7 @@ namespace Wheel_Of_Fortune.WheelModel {
                 }
             };
 
-            WheelCanvas.MouseRightButtonUp += delegate (object sender, MouseButtonEventArgs e) {
-                    story.Seek(TimeSpan.FromTicks(481080858));
-                    FrameTimer_Tick(null, null);
-            };
+            WheelCanvas.MouseRightButtonUp += WheelMouseRightButton_Click;
 #endif
 
             AddToCanvas();
@@ -86,6 +84,25 @@ namespace Wheel_Of_Fortune.WheelModel {
             FrameTimer.IsEnabled = true;
 
             RandomSeek();
+        }
+
+        public void WheelMouseRightButton_Click(object sender, MouseButtonEventArgs e) {
+            story.Seek(TimeSpan.FromTicks(481080858));
+            FrameTimer_Tick(null, null);
+        }
+
+        public Wheel GetAppropriateWheel(int round) {
+            if (round == 1) {
+                return new LevelOneWheel();
+            } else if (round == 2) {
+                return new LevelTwoWheel();
+            } else if (round == 3) {
+                return new LevelThreeWheel();
+            } else if (round == 4) {
+                return new LevelFourWheel();
+            }
+
+            return new LevelOneWheel();
         }
 
         private void WaitTimer_Tick(object sender, EventArgs e) {
@@ -289,14 +306,18 @@ namespace Wheel_Of_Fortune.WheelModel {
         }
 
         public Image SetNewArrowImage(string fileName) {
-            BitmapImage arrow = new BitmapImage(new Uri(fileName, UriKind.Relative));
-            Image arrowImage = new Image();
-            arrowImage.Source = arrow;
-            Canvas.SetLeft(arrowImage, 730);
-            Canvas.SetTop(arrowImage, 310);
-            Canvas.SetZIndex(arrowImage, 1000);
-            WheelCanvas.Children.Add(arrowImage);
-            return arrowImage;
+            if (fileName == null) {
+                return null;
+            } else {
+                BitmapImage arrow = new BitmapImage(new Uri(fileName, UriKind.Relative));
+                Image arrowImage = new Image();
+                arrowImage.Source = arrow;
+                Canvas.SetLeft(arrowImage, 730);
+                Canvas.SetTop(arrowImage, 310);
+                Canvas.SetZIndex(arrowImage, 1000);
+                WheelCanvas.Children.Add(arrowImage);
+                return arrowImage;
+            }
         }
 
         private void SetupMiddlePartOfWheel() {
@@ -342,6 +363,11 @@ namespace Wheel_Of_Fortune.WheelModel {
                 if (Third.Type == ThirdType.Bankrupt) {
                     TextBlock.FontSize = 15;
                     TextBlock.Margin = new Thickness(0, 375 - 82, -14, 0);
+                    textRT.Angle = -12;
+                }
+                else if (Third.Type == ThirdType.TenThousand) {
+                    TextBlock.FontSize = 18;
+                    TextBlock.Margin = new Thickness(0, 375 - 86, -14, 0);
                     textRT.Angle = -12;
                 } else {
                     TextBlock.FontSize = 15;

@@ -130,7 +130,11 @@
     <Compile Include="WheelModel\ThirdUI.cs" />
     <Compile Include="WheelModel\Wedge.cs" />
     <Compile Include="WheelModel\WedgeClickedEventArgs.cs" />
-    <Compile Include="WheelModel\Wheel.cs" />
+    <Compile Include="WheelModel\Wheels\LevelFourWheel.cs" />
+    <Compile Include="WheelModel\Wheels\LevelThreeWheel.cs" />
+    <Compile Include="WheelModel\Wheels\LevelTwoWheel.cs" />
+    <Compile Include="WheelModel\Wheels\LevelOneWheel.cs" />
+    <Compile Include="WheelModel\Wheels\Wheel.cs" />
     <Compile Include="WheelModel\WheelColors.cs" />
     <Compile Include="WheelModel\WheelStoppedArgs.cs" />
     <Compile Include="WheelModel\WheelUI.cs" />

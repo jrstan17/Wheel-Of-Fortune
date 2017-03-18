@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace Wheel_Of_Fortune.Board {
         internal BoardUI BoardUI;
         Third CurrentThird;
 
-        internal int CurrentRound { get; set; }
+        internal static int CurrentRound { get; set; }
 
         internal Prize CurrentPrize;
         internal PrizeFactory PrizeFactory = new PrizeFactory();
@@ -214,7 +215,18 @@ namespace Wheel_Of_Fortune.Board {
         private void SpinButton_Click(object sender, RoutedEventArgs e) {
             Game.PlayerChoice = PlayerChoice.Disabled;
             BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
-            wheelWindow.ShowDialog();
+
+            //wheelWindow.WheelUI.WheelMouseRightButton_Click(null, null);
+            wheelWindow.Show();
+
+    //        RenderTargetBitmap renderTargetBitmap =
+    //new RenderTargetBitmap((int)wheelWindow.Width * 3, (int)wheelWindow.Height * 3, 300, 300, PixelFormats.Pbgra32);
+    //        renderTargetBitmap.Render(wheelWindow);
+    //        PngBitmapEncoder pngImage = new PngBitmapEncoder();
+    //        pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+    //        using (Stream fileStream = File.Create(@"C:\users\jrstan17\desktop\text.png")) {
+    //            pngImage.Save(fileStream);
+    //        }
         }
 
         private void BuyButton_Click(object sender, RoutedEventArgs e) {
@@ -276,11 +288,12 @@ namespace Wheel_Of_Fortune.Board {
                 wheelWindow.Close();
             }
 
+            CurrentRound++;
+
             wheelWindow = new MainWindow();
             wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
             wheelWindow.WheelUI.WedgeClicked += WheelUI_WedgeClicked;
 
-            CurrentRound++;
             BoardUI.NewPuzzle();
 
             PrizeWindow prizeWindow = new PrizeWindow(this);

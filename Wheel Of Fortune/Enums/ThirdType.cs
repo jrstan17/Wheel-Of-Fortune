@@ -13,6 +13,7 @@ namespace Wheel_Of_Fortune.Enums {
         LoseATurn,
         Prize,
         FreePlay,
-        Million
+        Million,
+        TenThousand
     }
 }

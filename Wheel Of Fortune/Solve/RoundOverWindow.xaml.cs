@@ -26,16 +26,14 @@ namespace Wheel_Of_Fortune.Solve {
             Board = boardWindow;
             InitializeComponent();
 
-            int currentRound = Board.CurrentRound;
-
             foreach(Player p in Board.Players) {
                 p.WonRoundPrizes = new List<Prize>();
             }
 
             NameText.Text = BoardWindow.CurrentPlayer.Name;
-            CurrentRoundText.Text = "You've Won Round " + currentRound + "!";
+            CurrentRoundText.Text = "You've Won Round " + BoardWindow.CurrentRound + "!";
             RoundWinningsText.Text = BoardWindow.CurrentPlayer.RoundWinnings.ToString("C0");
-            NextRoundText.Text = "Onto Round " + (currentRound + 1) + "!";
+            NextRoundText.Text = "Onto Round " + (BoardWindow.CurrentRound + 1) + "!";
         }
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e) {
