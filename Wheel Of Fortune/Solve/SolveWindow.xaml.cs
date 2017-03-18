@@ -88,8 +88,6 @@ namespace Wheel_Of_Fortune.Solve {
             Close();
         }
 
-
-
         private void Timer_Tick(object sender, EventArgs e) {
             timerMech.UpdateTick(Timer.Interval.Milliseconds);
             TimerTextBlock.Text = timerMech.GetText();
