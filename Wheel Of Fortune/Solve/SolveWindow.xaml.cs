@@ -50,7 +50,8 @@ namespace Wheel_Of_Fortune.Solve {
             SolveResultEventArgs args = new SolveResultEventArgs();
 
             if (guess.Equals(Puzzle.Text)) {
-                args.IsWin = true;              
+                args.IsWin = true;
+                Wrong("");              
                 Window.BoardUI.RevealAll();
                 SolveResult(this, args);
             } else {

@@ -41,6 +41,9 @@ namespace Wheel_Of_Fortune.Board {
         const int PLAYER_BOARD_SPACING = 5;
         const int PLAYER_BOARD_START_Y = 480;
 
+        const int VOWEL_COST = 300;
+        const int MIN_WIN = 2000;
+
         internal List<Player> Players;
         internal static Player CurrentPlayer;
         int currentPlayerIndex = -1;
@@ -234,7 +237,7 @@ namespace Wheel_Of_Fortune.Board {
         private void BuyButton_Click(object sender, RoutedEventArgs e) {
             Game.PlayerChoice = PlayerChoice.Disabled;
             BoardUI.UsedLetterBoard.DisableLetters(LetterType.Consonant, true);
-            CurrentPlayer.RoundWinnings -= 250;
+            CurrentPlayer.RoundWinnings -= VOWEL_COST;
         }
 
         private void Window_Closed(object sender, EventArgs e) {
@@ -261,9 +264,9 @@ namespace Wheel_Of_Fortune.Board {
         public void CollectCurrentPlayersWinnings() {
             int roundWinnings = CurrentPlayer.CurrentRoundValue();
 
-            if (roundWinnings < 1000) {
-                CurrentPlayer.RoundWinnings = 1000;
-                CurrentPlayer.TotalWinnings += 1000;
+            if (roundWinnings < MIN_WIN) {
+                CurrentPlayer.RoundWinnings = MIN_WIN;
+                CurrentPlayer.TotalWinnings += MIN_WIN;
             } else {
                 CurrentPlayer.RoundWinnings = roundWinnings;
                 CurrentPlayer.TotalWinnings += roundWinnings;
@@ -311,7 +314,7 @@ namespace Wheel_Of_Fortune.Board {
 
         public void ToggleButtons() {
             if (Game != null) {
-                bool canBuy = (CurrentPlayer.RoundWinnings >= 250);
+                bool canBuy = (CurrentPlayer.RoundWinnings >= VOWEL_COST);
 
                 if (canBuy) {
                     Game.PlayerChoice = PlayerChoice.SpinAndBuy;
