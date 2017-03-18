@@ -48,11 +48,11 @@ namespace Wheel_Of_Fortune.WheelModel {
             StopTimer.Interval = TimeSpan.FromMilliseconds(50);
             StopTimer.Tick += StopTimer_Tick;
 
-            FrameTimer = new DispatcherTimer(DispatcherPriority.Render);
+            FrameTimer = new DispatcherTimer(DispatcherPriority.Normal);
             FrameTimer.Interval = TimeSpan.FromMilliseconds(10);
             FrameTimer.Tick += FrameTimer_Tick;
 
-            WaitTimer = new DispatcherTimer(DispatcherPriority.Render);
+            WaitTimer = new DispatcherTimer(DispatcherPriority.Normal);
             WaitTimer.Interval = TimeSpan.FromMilliseconds(5000);
             WaitTimer.Tick += WaitTimer_Tick;
 

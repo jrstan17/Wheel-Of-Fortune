@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -48,6 +49,7 @@ namespace Wheel_Of_Fortune.Board {
 
         internal BoardWindow(List<Player> players) {
             InitializeComponent();
+
             CurrentRound = 0;
 
 #if !DEBUG
