@@ -19,7 +19,8 @@ namespace Parse {
                 string[] splits = reader.ReadLine().Split('\t');
 
                 if (splits.Length >= 4) {
-                    if (splits[3][0] == 'R') {
+                    //if (splits[3][0] == 'R') {
+                    if (splits[3].Equals("BR")) {
                         int brLetters = 0;
 
                         foreach (char c in splits[0]) {

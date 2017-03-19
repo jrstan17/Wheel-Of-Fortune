@@ -93,6 +93,7 @@
     <Compile Include="Board\UsedLetterBoard.cs" />
     <Compile Include="Enums\LetterType.cs" />
     <Compile Include="Enums\PlayerChoice.cs" />
+    <Compile Include="Enums\RoundType.cs" />
     <Compile Include="Enums\TrilonState.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Countdown\LargeTimerMechanic.cs" />

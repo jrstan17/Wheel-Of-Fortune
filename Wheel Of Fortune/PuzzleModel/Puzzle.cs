@@ -12,8 +12,6 @@ namespace Wheel_Of_Fortune.PuzzleModel {
         internal int Number;
 
         public Puzzle(string rawLine, int number) {
-            //rawLine = "VOTING FOR YOUR FAVORITE AMERICAN IDOL CONTESTANT	Phrase	4/11/06";
-
             string[] splits = rawLine.Split('\t');
 
             Text = splits[0];
