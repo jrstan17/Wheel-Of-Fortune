@@ -30,10 +30,10 @@ namespace Wheel_Of_Fortune.Solve {
                 p.WonRoundPrizes = new List<Prize>();
             }
 
-            NameText.Text = BoardWindow.CurrentPlayer.Name;
-            CurrentRoundText.Text = "You've Won Round " + BoardWindow.CurrentRound + "!";
             NameText.Text = BoardWindow.CurrentPlayer.Name + ",";
             CurrentRoundText.Text = "You've Won Round " + currentRound + "!";
+            NameText.Text = BoardWindow.CurrentPlayer.Name;
+            CurrentRoundText.Text = "You've Won Round " + BoardWindow.CurrentRound + "!";
             RoundWinningsText.Text = BoardWindow.CurrentPlayer.RoundWinnings.ToString("C0");
             NextRoundText.Text = "Onto Round " + (BoardWindow.CurrentRound + 1) + "!";
         }
