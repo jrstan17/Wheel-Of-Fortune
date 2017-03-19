@@ -11,7 +11,7 @@ namespace Wheel_Of_Fortune.WheelModel {
     public class ColorChanger {
 
         private int colorChangeTime = 0;
-        
+
         public object Dispatcher { get; private set; }
 
         Random rnd = new Random();
@@ -39,7 +39,7 @@ namespace Wheel_Of_Fortune.WheelModel {
             CurrentG = BottomColor.G;
             CurrentB = BottomColor.B;
 
-            Timer = new DispatcherTimer();
+            Timer = new DispatcherTimer(DispatcherPriority.Render);
             SetColorChangeTime();
             Timer.Tick += Timer_Elapsed;
             SetChangePerTick();
@@ -55,11 +55,14 @@ namespace Wheel_Of_Fortune.WheelModel {
         }
 
         public void StartColorCycling() {
-                Timer.Start();
+            Timer.Start();
         }
 
         public void StopColorCycling() {
             Timer.Stop();
+            CurrentR = BottomColor.R;
+            CurrentG = BottomColor.G;
+            CurrentB = BottomColor.B;
         }
 
         private void Timer_Elapsed(object sender, EventArgs e) {

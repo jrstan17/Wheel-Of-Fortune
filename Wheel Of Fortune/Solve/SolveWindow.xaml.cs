@@ -50,7 +50,8 @@ namespace Wheel_Of_Fortune.Solve {
             SolveResultEventArgs args = new SolveResultEventArgs();
 
             if (guess.Equals(Puzzle.Text)) {
-                args.IsWin = true;              
+                args.IsWin = true;
+                Wrong(null);              
                 Window.BoardUI.RevealAll();
                 SolveResult(this, args);
             } else {
@@ -64,12 +65,15 @@ namespace Wheel_Of_Fortune.Solve {
             SubmitButton.IsEnabled = false;
             TimerTextBlock.IsEnabled = false;
             SolveTextBox.IsEnabled = false;
-            SajakBlock.Text = toolStripMessage;
 
-            DispatcherTimer waitTimer = new DispatcherTimer(DispatcherPriority.Normal);
-            waitTimer.Interval = TimeSpan.FromMilliseconds(2500);
-            waitTimer.Tick += new EventHandler(WaitTimer_Tick);
-            waitTimer.IsEnabled = true;
+            if (toolStripMessage != null) {
+                SajakBlock.Text = toolStripMessage;
+
+                DispatcherTimer waitTimer = new DispatcherTimer(DispatcherPriority.Normal);
+                waitTimer.Interval = TimeSpan.FromMilliseconds(2500);
+                waitTimer.Tick += new EventHandler(WaitTimer_Tick);
+                waitTimer.IsEnabled = true;
+            }
         }
 
         private void WaitTimer_Tick(object sender, EventArgs e) {
@@ -86,8 +90,6 @@ namespace Wheel_Of_Fortune.Solve {
             t.IsEnabled = false;
             Close();
         }
-
-
 
         private void Timer_Tick(object sender, EventArgs e) {
             timerMech.UpdateTick(Timer.Interval.Milliseconds);

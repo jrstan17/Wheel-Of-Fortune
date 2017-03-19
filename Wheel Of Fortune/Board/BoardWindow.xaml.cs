@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -27,7 +29,7 @@ namespace Wheel_Of_Fortune.Board {
         internal BoardUI BoardUI;
         Third CurrentThird;
 
-        internal int CurrentRound { get; set; }
+        internal static int CurrentRound { get; set; }
 
         internal Prize CurrentPrize;
         internal PrizeFactory PrizeFactory = new PrizeFactory();
@@ -39,6 +41,9 @@ namespace Wheel_Of_Fortune.Board {
         const int PLAYER_BOARD_SPACING = 5;
         const int PLAYER_BOARD_START_Y = 480;
 
+        const int VOWEL_COST = 300;
+        const int MIN_WIN = 2000;
+
         internal List<Player> Players;
         internal static Player CurrentPlayer;
         int currentPlayerIndex = -1;
@@ -47,6 +52,7 @@ namespace Wheel_Of_Fortune.Board {
 
         internal BoardWindow(List<Player> players) {
             InitializeComponent();
+
             CurrentRound = 0;
 
 #if !DEBUG
@@ -214,13 +220,24 @@ namespace Wheel_Of_Fortune.Board {
         private void SpinButton_Click(object sender, RoutedEventArgs e) {
             Game.PlayerChoice = PlayerChoice.Disabled;
             BoardUI.UsedLetterBoard.DisableLetters(LetterType.Vowel, true);
-            wheelWindow.ShowDialog();
+
+            //wheelWindow.WheelUI.WheelMouseRightButton_Click(null, null);
+            wheelWindow.Show();
+
+    //        RenderTargetBitmap renderTargetBitmap =
+    //new RenderTargetBitmap((int)wheelWindow.Width * 3, (int)wheelWindow.Height * 3, 300, 300, PixelFormats.Pbgra32);
+    //        renderTargetBitmap.Render(wheelWindow);
+    //        PngBitmapEncoder pngImage = new PngBitmapEncoder();
+    //        pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+    //        using (Stream fileStream = File.Create(@"C:\users\jrstan17\desktop\text.png")) {
+    //            pngImage.Save(fileStream);
+    //        }
         }
 
         private void BuyButton_Click(object sender, RoutedEventArgs e) {
             Game.PlayerChoice = PlayerChoice.Disabled;
             BoardUI.UsedLetterBoard.DisableLetters(LetterType.Consonant, true);
-            CurrentPlayer.RoundWinnings -= 250;
+            CurrentPlayer.RoundWinnings -= VOWEL_COST;
         }
 
         private void Window_Closed(object sender, EventArgs e) {
@@ -247,9 +264,9 @@ namespace Wheel_Of_Fortune.Board {
         public void CollectCurrentPlayersWinnings() {
             int roundWinnings = CurrentPlayer.CurrentRoundValue();
 
-            if (roundWinnings < 1000) {
-                CurrentPlayer.RoundWinnings = 1000;
-                CurrentPlayer.TotalWinnings += 1000;
+            if (roundWinnings < MIN_WIN) {
+                CurrentPlayer.RoundWinnings = MIN_WIN;
+                CurrentPlayer.TotalWinnings += MIN_WIN;
             } else {
                 CurrentPlayer.RoundWinnings = roundWinnings;
                 CurrentPlayer.TotalWinnings += roundWinnings;
@@ -276,11 +293,12 @@ namespace Wheel_Of_Fortune.Board {
                 wheelWindow.Close();
             }
 
+            CurrentRound++;
+
             wheelWindow = new MainWindow();
             wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
             wheelWindow.WheelUI.WedgeClicked += WheelUI_WedgeClicked;
 
-            CurrentRound++;
             BoardUI.NewPuzzle();
 
             PrizeWindow prizeWindow = new PrizeWindow(this);
@@ -296,7 +314,7 @@ namespace Wheel_Of_Fortune.Board {
 
         public void ToggleButtons() {
             if (Game != null) {
-                bool canBuy = (CurrentPlayer.RoundWinnings >= 250);
+                bool canBuy = (CurrentPlayer.RoundWinnings >= VOWEL_COST);
 
                 if (canBuy) {
                     Game.PlayerChoice = PlayerChoice.SpinAndBuy;

@@ -5,15 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Wheel_Of_Fortune.Enums {
-    public enum ThirdType {
+    public enum RoundType {
         Regular,
-        MedAmount,
-        HighAmount,
-        Bankrupt,
-        LoseATurn,
-        Prize,
-        FreePlay,
-        Million,
-        TenThousand
+        Bonus
     }
 }

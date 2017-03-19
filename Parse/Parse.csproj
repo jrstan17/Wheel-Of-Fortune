@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Parse.Program</StartupObject>
+    <StartupObject>Parse.PuzzleSizeUtility</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

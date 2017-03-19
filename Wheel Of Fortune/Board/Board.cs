@@ -141,7 +141,7 @@ namespace Wheel_Of_Fortune.Board {
         }
 
         public Puzzle NewPuzzle() {
-            return PuzzleFactory.NewPuzzle();
+            return PuzzleFactory.NewPuzzle(RoundType.Regular);
         }
 
         public void AddTrilonChangeEvent() {

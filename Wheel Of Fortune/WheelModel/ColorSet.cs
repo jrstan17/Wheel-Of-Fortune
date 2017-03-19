@@ -10,6 +10,10 @@ namespace Wheel_Of_Fortune {
         internal Color TopColor;
         internal Color BottomColor;
 
+        public ColorSet() {
+
+        }
+
         public ColorSet(Color one, Color two) {
             TopColor = one;
             BottomColor = two;

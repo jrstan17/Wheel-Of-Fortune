@@ -93,6 +93,7 @@
     <Compile Include="Board\UsedLetterBoard.cs" />
     <Compile Include="Enums\LetterType.cs" />
     <Compile Include="Enums\PlayerChoice.cs" />
+    <Compile Include="Enums\RoundType.cs" />
     <Compile Include="Enums\TrilonState.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Countdown\LargeTimerMechanic.cs" />
@@ -130,7 +131,11 @@
     <Compile Include="WheelModel\ThirdUI.cs" />
     <Compile Include="WheelModel\Wedge.cs" />
     <Compile Include="WheelModel\WedgeClickedEventArgs.cs" />
-    <Compile Include="WheelModel\Wheel.cs" />
+    <Compile Include="WheelModel\Wheels\LevelFourWheel.cs" />
+    <Compile Include="WheelModel\Wheels\LevelThreeWheel.cs" />
+    <Compile Include="WheelModel\Wheels\LevelTwoWheel.cs" />
+    <Compile Include="WheelModel\Wheels\LevelOneWheel.cs" />
+    <Compile Include="WheelModel\Wheels\Wheel.cs" />
     <Compile Include="WheelModel\WheelColors.cs" />
     <Compile Include="WheelModel\WheelStoppedArgs.cs" />
     <Compile Include="WheelModel\WheelUI.cs" />

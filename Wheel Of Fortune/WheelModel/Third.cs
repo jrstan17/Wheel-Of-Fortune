@@ -54,14 +54,6 @@ namespace Wheel_Of_Fortune {
             InitColorChangers(text, back);
         }
 
-        internal ColorChanger GetTextColorChanger() {
-            return TextColorChanger;
-        }
-
-        internal ColorChanger GetBackColorChanger() {
-            return BackColorChanger;
-        }
-
         public override bool Equals(object obj) {
             if (!(obj is Third)) {
                 return false;
