@@ -18,7 +18,7 @@ using Wheel_Of_Fortune.Board;
 using Wheel_Of_Fortune.WheelModel.Wheels;
 
 namespace Wheel_Of_Fortune.WheelModel {
-    class WheelUI {
+    class WheelUI : IDisposable {
         internal Wheel Wheel;
         Third CurrentThird;
         Canvas WheelCanvas;
@@ -92,6 +92,10 @@ namespace Wheel_Of_Fortune.WheelModel {
         }
 
         public Wheel GetAppropriateWheel(int round) {
+            if (Wheel != null) {
+                Wheel.Dispose();
+            }
+
             if (round == 1) {
                 return new LevelOneWheel();
             } else if (round == 2) {
@@ -403,6 +407,10 @@ namespace Wheel_Of_Fortune.WheelModel {
             if (handler != null) {
                 handler(this, e);
             }
+        }
+
+        public void Dispose() {
+            
         }
 
         public event EventHandler<WedgeClickedEventArgs> WedgeClicked;

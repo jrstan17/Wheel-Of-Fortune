@@ -60,9 +60,6 @@ namespace Wheel_Of_Fortune.WheelModel {
 
         public void StopColorCycling() {
             Timer.Stop();
-            CurrentR = BottomColor.R;
-            CurrentG = BottomColor.G;
-            CurrentB = BottomColor.B;
         }
 
         private void Timer_Elapsed(object sender, EventArgs e) {

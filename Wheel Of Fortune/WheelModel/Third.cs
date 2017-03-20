@@ -12,7 +12,7 @@ using Wheel_Of_Fortune.Enums;
 using Wheel_Of_Fortune.WheelModel;
 
 namespace Wheel_Of_Fortune {
-    public class Third {
+    public class Third : IDisposable{
 
         internal int Index = 1;
         internal ColorChanger TextColorChanger;
@@ -62,6 +62,13 @@ namespace Wheel_Of_Fortune {
             Third comingIn = (Third)obj;
 
             return (this.TextColorChanger.TopColor == comingIn.TextColorChanger.TopColor && this.BackColorChanger.TopColor == comingIn.BackColorChanger.TopColor && this.Text.Equals(comingIn.Text) && this.Value == comingIn.Value && this.Type == comingIn.Type);
+        }
+
+        public void Dispose() {
+            TextColorChanger.StopColorCycling();
+            TextColorChanger = null;
+            BackColorChanger.StopColorCycling();
+            BackColorChanger = null;
         }
     }
 }

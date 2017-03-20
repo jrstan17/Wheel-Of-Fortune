@@ -8,7 +8,7 @@ using System.Windows.Threading;
 using Wheel_Of_Fortune.Enums;
 
 namespace Wheel_Of_Fortune.WheelModel.Wheels {
-    abstract class Wheel {
+    abstract class Wheel : IDisposable{
         internal List<Space> Spaces;
         internal Third CurrentThird;
         internal int ThirdCount;
@@ -135,6 +135,16 @@ namespace Wheel_Of_Fortune.WheelModel.Wheels {
             }
 
             ThirdCount = count;
+        }
+
+        public void Dispose() {
+           foreach(Space s in Spaces) {
+                foreach(Wedge w in s.Wedges) {
+                    foreach(Third t in w.Thirds) {
+                        t.Dispose();
+                    }
+                }
+            }
         }
     }
 }
