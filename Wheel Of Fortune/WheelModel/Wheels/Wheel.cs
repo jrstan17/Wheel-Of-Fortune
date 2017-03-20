@@ -44,6 +44,18 @@ namespace Wheel_Of_Fortune.WheelModel.Wheels {
             return null;
         }
 
+        public Third GetThird(ThirdType type) {
+            foreach (Space s in Spaces) {
+                foreach (Third t in s.Wedges[0].Thirds) {
+                    if (t.Type == type) {
+                        return t;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public bool MultipleWedgesInSpace(Third third) {
             Space space = SpaceWithThird(third);
             return (space.Wedges.Count > 1);

@@ -209,6 +209,7 @@ namespace Wheel_Of_Fortune.Board {
             if (CurrentPlayer.FreePlays > 0) {
                 if (MessageBox.Show("You have a Free Play! Would you like to use it now?", "Use Free Play?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
                     CurrentPlayer.FreePlays--;
+                    ToggleButtons();
                 } else {
                     GoToNextPlayer();
                 }
@@ -258,10 +259,11 @@ namespace Wheel_Of_Fortune.Board {
             if (e.IsWin) {
                 CollectCurrentPlayersWinnings();
                 RoundOverWindow roundWindow = new RoundOverWindow(this);
-                roundWindow.ShowDialog();                
+                roundWindow.ShowDialog();
+                GoToNextPlayer();
+            } else {
+                AskFreePlayQuestion();
             }
-
-            GoToNextPlayer();
         }
 
         public void CollectCurrentPlayersWinnings() {

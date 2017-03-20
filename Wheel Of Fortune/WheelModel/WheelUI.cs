@@ -126,6 +126,9 @@ namespace Wheel_Of_Fortune.WheelModel {
             story.Seek(TimeSpan.FromMilliseconds(randomSeek));
             FrameTimer_Tick(null, null);
 
+            //FrameTimer.IsEnabled = false;
+            //CurrentThird = Wheel.GetThird(ThirdType.FreePlay);
+
             WheelStoppedArgs args = new WheelStoppedArgs();
             args.CurrentThird = CurrentThird;
             OnWheelStopped(args);

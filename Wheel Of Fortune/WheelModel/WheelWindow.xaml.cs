@@ -24,5 +24,9 @@ namespace Wheel_Of_Fortune {
             SajakText.FontSize = 26;
             SajakText.Text = "\"Click the red arrow to spin the wheel!\"";
         }
+
+        private void RandomizeButton_Click(object sender, RoutedEventArgs e) {
+            WheelUI.RandomSeek();
+        }
     }
 }
