@@ -37,7 +37,6 @@ namespace Wheel_Of_Fortune.WheelModel {
         Image arrow;
 
         public WheelUI(MainWindow Window) {
-            Wheel = GetAppropriateWheel(BoardWindow.CurrentRound);
             story = new Storyboard();
             FrameTimer = new DispatcherTimer();
             WaitTimer = new DispatcherTimer();
@@ -58,6 +57,8 @@ namespace Wheel_Of_Fortune.WheelModel {
 
             this.Window = Window;
             WheelCanvas = Window.WheelCanvas;
+
+            SetAppropriateWheel(1);
 
 #if DEBUG
             WheelCanvas.MouseWheel += delegate (object sender, MouseWheelEventArgs e) {
@@ -91,22 +92,16 @@ namespace Wheel_Of_Fortune.WheelModel {
             FrameTimer_Tick(null, null);
         }
 
-        public Wheel GetAppropriateWheel(int round) {
-            if (Wheel != null) {
-                Wheel.Dispose();
-            }
-
+        public void SetAppropriateWheel(int round) {
             if (round == 1) {
-                return new LevelOneWheel();
+                Wheel = new LevelOneWheel();
             } else if (round == 2) {
-                return new LevelTwoWheel();
+                Wheel = new LevelTwoWheel();
             } else if (round == 3) {
-                return new LevelThreeWheel();
+                Wheel = new LevelThreeWheel();
             } else if (round == 4) {
-                return new LevelFourWheel();
+                Wheel = new LevelFourWheel();
             }
-
-            return new LevelOneWheel();
         }
 
         private void WaitTimer_Tick(object sender, EventArgs e) {
