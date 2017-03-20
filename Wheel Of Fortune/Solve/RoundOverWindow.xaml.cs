@@ -31,7 +31,7 @@ namespace Wheel_Of_Fortune.Solve {
             }
 
             NameText.Text = BoardWindow.CurrentPlayer.Name + ",";
-            CurrentRoundText.Text = "You've Won Round " + currentRound + "!";
+            CurrentRoundText.Text = "You've Won Round " + BoardWindow.CurrentRound + "!";
             NameText.Text = BoardWindow.CurrentPlayer.Name;
             CurrentRoundText.Text = "You've Won Round " + BoardWindow.CurrentRound + "!";
             RoundWinningsText.Text = BoardWindow.CurrentPlayer.RoundWinnings.ToString("C0");
