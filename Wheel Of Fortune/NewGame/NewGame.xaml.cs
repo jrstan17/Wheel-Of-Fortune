@@ -26,14 +26,15 @@ namespace Wheel_Of_Fortune.NewGame {
 
 #if DEBUG
             if (MessageBox.Show("Auto generate players?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
-                List<Player> autoPlayers = new List<Player>();
-                autoPlayers.Add(new Player("Jason"));
-                autoPlayers.Add(new Player("David"));
-                autoPlayers.Add(new Player("Philip"));
-                autoPlayers.Add(new Player("Leslie"));
+                List<string> autoPlayers = new List<string>();
+                autoPlayers.Add("Jason");
+                autoPlayers.Add("David");
+                autoPlayers.Add("Philip");
+                autoPlayers.Add("Leslie");
 
-                BoardWindow board = new BoardWindow(autoPlayers);
-                board.Show();
+                RandomizeWindow rndWindow = new RandomizeWindow(autoPlayers);
+                rndWindow.SmallTimer_Tick(null, null);
+                rndWindow.StartButton_Click(null, null);
                 this.Close();
             }            
 #endif

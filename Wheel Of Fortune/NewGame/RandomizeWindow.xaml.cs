@@ -27,6 +27,7 @@ namespace Wheel_Of_Fortune.NewGame {
         int startingPlayer = -1;
 
         DispatcherTimer smallTimer;
+        DispatcherTimer largeTimer;
 
         public RandomizeWindow(List<string> names) {
             InitializeComponent();
@@ -39,7 +40,7 @@ namespace Wheel_Of_Fortune.NewGame {
             smallTimer = new DispatcherTimer(DispatcherPriority.Normal);
             smallTimer.Interval = TimeSpan.FromMilliseconds(100);
 
-            DispatcherTimer largeTimer = new DispatcherTimer();
+            largeTimer = new DispatcherTimer();
             largeTimer.Interval = TimeSpan.FromMilliseconds(4000);
 
             smallTimer.Tick += SmallTimer_Tick;
@@ -49,7 +50,7 @@ namespace Wheel_Of_Fortune.NewGame {
             largeTimer.IsEnabled = true;
         }
 
-        private void StartButton_Click(object sender, RoutedEventArgs e) {
+        internal void StartButton_Click(object sender, RoutedEventArgs e) {
             BoardWindow boardWindow = new BoardWindow(GetPlayerList());
             this.Close();
             boardWindow.Show();            
@@ -73,21 +74,24 @@ namespace Wheel_Of_Fortune.NewGame {
 
         private void LargeTimer_Tick(object sender, EventArgs e) {
             smallTimer.IsEnabled = false;
+            largeTimer.IsEnabled = false;
             DescriptText.Text = "With the roll of a dice, it looks like " + NameText.Text + " will be starting us off!";
             StartButton.IsEnabled = true;
         }
 
-        private void SmallTimer_Tick(object sender, EventArgs e) {
-            int randomIndex = rnd.Next(0, Names.Count);
+        internal void SmallTimer_Tick(object sender, EventArgs e) {
+            if (Names.Count != 0) {
+                int randomIndex = rnd.Next(0, Names.Count);
 
-            while (randomIndex == previous) {
-                randomIndex = rnd.Next(0, Names.Count);
+                while (randomIndex == previous) {
+                    randomIndex = rnd.Next(0, Names.Count);
+                }
+
+                previous = randomIndex;
+
+                NameText.Text = Names[randomIndex];
+                startingPlayer = randomIndex;
             }
-
-            previous = randomIndex;
-
-            NameText.Text = Names[randomIndex];
-            startingPlayer = randomIndex;
         }
     }
 }

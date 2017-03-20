@@ -43,7 +43,7 @@ namespace Wheel_Of_Fortune.Prizes {
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e) {
             Timer.IsEnabled = false;
-            this.Hide();
+            this.Close();
             Board.Show();
         }
 
