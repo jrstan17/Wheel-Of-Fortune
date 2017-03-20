@@ -28,6 +28,8 @@ namespace Wheel_Of_Fortune.Solve {
         TimerMechanic timerMech;
         DispatcherTimer Timer;
 
+        string Guess;
+
         public SolveWindow(BoardWindow window) {
             InitializeComponent();
 
@@ -46,18 +48,17 @@ namespace Wheel_Of_Fortune.Solve {
         public void SubmitButton_Click(object sender, RoutedEventArgs e) {
             Timer.IsEnabled = false;
 
-            string guess = SolveTextBox.Text.ToUpper();
-            SolveResultEventArgs args = new SolveResultEventArgs();
+            Guess = SolveTextBox.Text.ToUpper();
 
-            if (guess.Equals(Puzzle.Text)) {
-                args.IsWin = true;
+            if (Guess.Equals(Puzzle.Text)) {
                 Wrong(null);              
                 Window.BoardUI.RevealAll();
+
+                SolveResultEventArgs args = new SolveResultEventArgs();
+                args.IsWin = true;
                 SolveResult(this, args);
             } else {
-                args.IsWin = false;
                 Wrong("That is incorrect.");
-                SolveResult(this, args);
             }
         }
 
@@ -77,16 +78,11 @@ namespace Wheel_Of_Fortune.Solve {
         }
 
         private void WaitTimer_Tick(object sender, EventArgs e) {
-            string guess = SolveTextBox.Text.ToUpper();
-
-            if (guess.Equals(Puzzle.Text)) {
-                Close();
-                return;
-            }
-
             DispatcherTimer t = (DispatcherTimer)sender;
             t.IsEnabled = false;
-            Close();
+            SolveResultEventArgs args = new SolveResultEventArgs();
+            args.IsWin = false;
+            SolveResult(this, args);
         }
 
         private void Timer_Tick(object sender, EventArgs e) {

@@ -224,14 +224,14 @@ namespace Wheel_Of_Fortune.Board {
             //wheelWindow.WheelUI.WheelMouseRightButton_Click(null, null);
             wheelWindow.Show();
 
-    //        RenderTargetBitmap renderTargetBitmap =
-    //new RenderTargetBitmap((int)wheelWindow.Width * 3, (int)wheelWindow.Height * 3, 300, 300, PixelFormats.Pbgra32);
-    //        renderTargetBitmap.Render(wheelWindow);
-    //        PngBitmapEncoder pngImage = new PngBitmapEncoder();
-    //        pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-    //        using (Stream fileStream = File.Create(@"C:\users\jrstan17\desktop\text.png")) {
-    //            pngImage.Save(fileStream);
-    //        }
+            //        RenderTargetBitmap renderTargetBitmap =
+            //new RenderTargetBitmap((int)wheelWindow.Width * 3, (int)wheelWindow.Height * 3, 300, 300, PixelFormats.Pbgra32);
+            //        renderTargetBitmap.Render(wheelWindow);
+            //        PngBitmapEncoder pngImage = new PngBitmapEncoder();
+            //        pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+            //        using (Stream fileStream = File.Create(@"C:\users\jrstan17\desktop\text.png")) {
+            //            pngImage.Save(fileStream);
+            //        }
         }
 
         private void BuyButton_Click(object sender, RoutedEventArgs e) {
@@ -251,19 +251,17 @@ namespace Wheel_Of_Fortune.Board {
             window.ShowDialog();
         }
 
-        private void Window_SolveResult(object sender, SolveResultEventArgs e) {            
+        private void Window_SolveResult(object sender, SolveResultEventArgs e) {
+            SolveWindow solveWindow = (SolveWindow)sender;
+            solveWindow.Close();
+
             if (e.IsWin) {
-                SolveWindow solveWindow = (SolveWindow)sender;
-                solveWindow.Close();
                 CollectCurrentPlayersWinnings();
                 RoundOverWindow roundWindow = new RoundOverWindow(this);
-                roundWindow.ShowDialog();
-                GoToNextPlayer();
-            } else {
-                SolveWindow solveWindow = (SolveWindow)sender;
-                solveWindow.Close();
-                GoToNextPlayer();
+                roundWindow.ShowDialog();                
             }
+
+            GoToNextPlayer();
         }
 
         public void CollectCurrentPlayersWinnings() {
@@ -352,7 +350,7 @@ namespace Wheel_Of_Fortune.Board {
         }
 
         private void ShowSolution_Click(object sender, RoutedEventArgs e) {
-                MessageBox.Show(BoardUI.Board.CurrentPuzzle.Text, "Puzzle Solution", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(BoardUI.Board.CurrentPuzzle.Text, "Puzzle Solution", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

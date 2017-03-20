@@ -110,6 +110,8 @@ namespace Wheel_Of_Fortune.WheelModel {
         }
 
         private void WaitTimer_Tick(object sender, EventArgs e) {
+            FrameTimer.IsEnabled = false;
+
             WheelStoppedArgs args = new WheelStoppedArgs();
             args.CurrentThird = CurrentThird;
             OnWheelStopped(args);
