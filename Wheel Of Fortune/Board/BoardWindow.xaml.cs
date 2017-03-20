@@ -258,6 +258,11 @@ namespace Wheel_Of_Fortune.Board {
                 CollectCurrentPlayersWinnings();
                 RoundOverWindow roundWindow = new RoundOverWindow(this);
                 roundWindow.ShowDialog();
+                GoToNextPlayer();
+            } else {
+                SolveWindow solveWindow = (SolveWindow)sender;
+                solveWindow.Close();
+                GoToNextPlayer();
             }
         }
 
@@ -273,15 +278,6 @@ namespace Wheel_Of_Fortune.Board {
             }
 
             CurrentPlayer.MoveWonPrizesToBank();
-        }
-
-        public void SolveResult(bool isWin) {
-            if (isWin) {
-                CollectCurrentPlayersWinnings();
-                NewGame();
-            }
-
-            GoToNextPlayer();
         }
 
         private void NewGame_Click(object sender, RoutedEventArgs e) {

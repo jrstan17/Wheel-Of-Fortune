@@ -80,10 +80,8 @@ namespace Wheel_Of_Fortune.Solve {
             string guess = SolveTextBox.Text.ToUpper();
 
             if (guess.Equals(Puzzle.Text)) {
-                Window.SolveResult(true);
                 Close();
-            } else {
-                Window.SolveResult(false);
+                return;
             }
 
             DispatcherTimer t = (DispatcherTimer)sender;
