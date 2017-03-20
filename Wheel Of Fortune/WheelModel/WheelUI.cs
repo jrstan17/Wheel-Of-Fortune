@@ -165,7 +165,7 @@ namespace Wheel_Of_Fortune.WheelModel {
                         Window.SajakText.Text = "\"Ouch! You've landed on Bankrupt. I'm sorry!\"";
                     } else if (CurrentThird.Type == ThirdType.FreePlay) {
                         Window.SajakText.FontSize = 24;
-                        Window.SajakText.Text = "\"You got a Free Play! The current value is $500. Please choose a consonant.\"";
+                        Window.SajakText.Text = "\"You got a Free Play! The current value is " + CurrentThird.Text + ". Please choose a consonant.\"";
                     } else if (CurrentThird.Type == ThirdType.HighAmount) {
                         Window.SajakText.FontSize = 36;
                         Window.SajakText.Text = "\"" + CurrentThird.Text + "! Now choose wisely!\"";
@@ -173,7 +173,7 @@ namespace Wheel_Of_Fortune.WheelModel {
                         Window.SajakText.FontSize = 26;
                         Window.SajakText.Text = "\"So sorry, " + BoardWindow.CurrentPlayer.Name + ". You've lost your turn.\"";
                     } else if (CurrentThird.Type == ThirdType.Million) {
-                        Window.SajakText.FontSize = 18;
+                        Window.SajakText.FontSize = 32;
                         Window.SajakText.Text = "\"A Million Dollars!\"";
                     } else if (CurrentThird.Type == ThirdType.Regular) {
                         Window.SajakText.FontSize = 38;
@@ -264,7 +264,7 @@ namespace Wheel_Of_Fortune.WheelModel {
                             story.Begin();
                             story.Pause();
 
-                            Window.SajakText.Text = "\"The current value is $500. Please choose a consonant.\"";
+                            Window.SajakText.Text = "\"The current value is " + CurrentThird.Text + ".\"";
 
                             WaitTimer.IsEnabled = true;
                         }
