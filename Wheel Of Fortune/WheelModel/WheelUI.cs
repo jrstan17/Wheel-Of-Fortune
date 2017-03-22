@@ -60,8 +60,6 @@ namespace Wheel_Of_Fortune.WheelModel {
             this.Window = Window;
             WheelCanvas = Window.WheelCanvas;
 
-            SetAppropriateWheel(1);
-
 #if DEBUG
             WheelCanvas.MouseWheel += delegate (object sender, MouseWheelEventArgs e) {
                 TimeSpan current = story.GetCurrentTime();
@@ -102,9 +100,9 @@ namespace Wheel_Of_Fortune.WheelModel {
             } else if (round == 2) {
                 return new LevelTwoWheel();
             } else if (round == 3) {
-                Wheel = new LevelThreeWheel();
+                return new LevelThreeWheel();
             } else if (round == 4) {
-                Wheel = new LevelFourWheel();
+                return new LevelFourWheel();
             }
 
             return new LevelOneWheel();
