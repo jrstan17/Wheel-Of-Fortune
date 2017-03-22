@@ -281,14 +281,15 @@ namespace Wheel_Of_Fortune.Board {
         }
 
         public void NewGame() {
+            if (wheelWindow != null) {
+                wheelWindow.Close();
+            }
+
             CurrentRound++;
 
-            if (wheelWindow == null) {
-                wheelWindow = new MainWindow();
-                wheelWindow.WheelUI.SetAppropriateWheel(CurrentRound);
-                wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
-                wheelWindow.WheelUI.WedgeClicked += WheelUI_WedgeClicked;
-            }
+            wheelWindow = new MainWindow();
+            wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
+            wheelWindow.WheelUI.WedgeClicked += WheelUI_WedgeClicked;
 
             BoardUI.NewPuzzle();
 
