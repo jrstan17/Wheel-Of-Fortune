@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wheel_Of_Fortune.Prizes"
         mc:Ignorable="d"
-        Title="PrizeWindow" Height="459.732" Width="354.483" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowInTaskbar="False" Loaded="Window_Loaded">
+        Title="PrizeWindow" Height="459.732" Width="354.483" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Grid>
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="403" Width="267">
             <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="78" TextWrapping="Wrap" Text="This Round's Prize Wedge Contains" VerticalAlignment="Top" Width="244" FontSize="26" TextAlignment="Center"/>

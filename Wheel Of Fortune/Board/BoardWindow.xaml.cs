@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wheel_Of_Fortune.Enums;
@@ -62,11 +63,6 @@ namespace Wheel_Of_Fortune.Board {
             Players = players;
             InitPlayerTextBlocks();
             GoToNextPlayer();
-
-            BoardUI = new BoardUI(this);
-            Game = new Game();
-            Game.OnPlayerChoiceChange += Game_OnPlayerChoiceChange;
-            Game.PlayerChoice = PlayerChoice.SpinOnly;
 
             NewGame();
         }
@@ -285,14 +281,16 @@ namespace Wheel_Of_Fortune.Board {
         }
 
         public void NewGame() {
+            BoardUI = new BoardUI(this);
+            Game = new Game();
+            Game.OnPlayerChoiceChange += Game_OnPlayerChoiceChange;
+            Game.PlayerChoice = PlayerChoice.SpinOnly;
+
             CurrentRound++;
 
-            if (wheelWindow == null) {
-                wheelWindow = new MainWindow();
-                wheelWindow.WheelUI.SetAppropriateWheel(CurrentRound);
-                wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
-                wheelWindow.WheelUI.WedgeClicked += WheelUI_WedgeClicked;
-            }
+            wheelWindow = new MainWindow();
+            wheelWindow.WheelUI.WheelStopped += WheelUI_WheelStopped;
+            wheelWindow.WheelUI.WedgeClicked += WheelUI_WedgeClicked;
 
             BoardUI.NewPuzzle();
 

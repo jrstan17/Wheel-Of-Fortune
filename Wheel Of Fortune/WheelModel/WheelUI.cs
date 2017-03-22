@@ -18,18 +18,20 @@ using Wheel_Of_Fortune.Board;
 using Wheel_Of_Fortune.WheelModel.Wheels;
 
 namespace Wheel_Of_Fortune.WheelModel {
-    class WheelUI : IDisposable {
+    class WheelUI  {
         internal Wheel Wheel;
         Third CurrentThird;
+
+        List<Third> WheelThirds;
+
         Canvas WheelCanvas;
         Grid MainWheelGrid;
-        Storyboard story;
+        internal Storyboard story;
         DispatcherTimer StopTimer;
         internal bool IsPaused = false;
         double Speed = 0;
         double Angle = 0;
 
-        Random rnd;
         DispatcherTimer FrameTimer;
         DispatcherTimer WaitTimer;
         MainWindow Window;
@@ -41,7 +43,6 @@ namespace Wheel_Of_Fortune.WheelModel {
             FrameTimer = new DispatcherTimer();
             WaitTimer = new DispatcherTimer();
             MainWheelGrid = new Grid();
-            rnd = new Random();
 
             StopTimer = new DispatcherTimer();
             StopTimer.Interval = TimeSpan.FromMilliseconds(50);
@@ -58,7 +59,7 @@ namespace Wheel_Of_Fortune.WheelModel {
             this.Window = Window;
             WheelCanvas = Window.WheelCanvas;
 
-            SetAppropriateWheel(1);
+            SetAppropriateWheel(BoardWindow.CurrentRound);
 
 #if DEBUG
             WheelCanvas.MouseWheel += delegate (object sender, MouseWheelEventArgs e) {
@@ -82,8 +83,6 @@ namespace Wheel_Of_Fortune.WheelModel {
             story.Begin();
             story.Pause();
 
-            FrameTimer.IsEnabled = true;
-
             RandomSeek();
         }
 
@@ -99,7 +98,7 @@ namespace Wheel_Of_Fortune.WheelModel {
                 Wheel = new LevelTwoWheel();
             } else if (round == 3) {
                 Wheel = new LevelThreeWheel();
-            } else if (round == 4) {
+            } else {
                 Wheel = new LevelFourWheel();
             }
         }
@@ -117,7 +116,7 @@ namespace Wheel_Of_Fortune.WheelModel {
         }
 
         public void RandomSeek() {
-            int randomSeek = rnd.Next(0, 60000);
+            int randomSeek = Utilities.rnd.Next(0, 60000);
             story.Seek(TimeSpan.FromMilliseconds(randomSeek));
             FrameTimer_Tick(null, null);
 
@@ -143,7 +142,6 @@ namespace Wheel_Of_Fortune.WheelModel {
         }
 
         private void StopTimer_Tick(object sender, EventArgs e) {
-
             Speed -= 0.3;
 
             if (Speed > 0.01) {
@@ -152,6 +150,7 @@ namespace Wheel_Of_Fortune.WheelModel {
                 Speed = 0;
                 story.Pause();
                 StopTimer.IsEnabled = false;
+                FrameTimer.IsEnabled = false;
 
                 if (!(CurrentThird.Type == ThirdType.Prize)) {
                     WaitTimer.IsEnabled = true;
@@ -205,7 +204,7 @@ namespace Wheel_Of_Fortune.WheelModel {
         }
 
         public void StartAnimation() {
-            Speed = rnd.Next(25, 35);
+            Speed = Utilities.rnd.Next(25, 35);
 
             FrameTimer.IsEnabled = true;
             story.SetSpeedRatio(Speed);
@@ -222,7 +221,7 @@ namespace Wheel_Of_Fortune.WheelModel {
 
         public void AddToCanvas() {
             Random rnd = new Random();
-            List<Third> Thirds = Wheel.GetAllVisibleThirds();
+            WheelThirds = Wheel.GetAllVisibleThirds();
             List<Wedge> Wedges = Wheel.GetAllVisibleWedges();
 
             double startAngle = 15;
@@ -235,7 +234,7 @@ namespace Wheel_Of_Fortune.WheelModel {
                 Grid.RenderTransform = rt;
                 Grid.RenderTransformOrigin = new Point(0.5, 0.5);
 
-                ThirdUI thirdUI = new ThirdUI(Thirds[i]);
+                ThirdUI thirdUI = new ThirdUI(WheelThirds[i]);
                 thirdUI.Height = 750;
                 thirdUI.Width = 750;
                 thirdUI.Margin = new Thickness(0);
@@ -407,10 +406,6 @@ namespace Wheel_Of_Fortune.WheelModel {
             if (handler != null) {
                 handler(this, e);
             }
-        }
-
-        public void Dispose() {
-            
         }
 
         public event EventHandler<WedgeClickedEventArgs> WedgeClicked;
