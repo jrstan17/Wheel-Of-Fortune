@@ -28,5 +28,9 @@ namespace Wheel_Of_Fortune {
         private void RandomizeButton_Click(object sender, RoutedEventArgs e) {
             WheelUI.RandomSeek();
         }
+
+        internal void Dispose() {
+            WheelUI.Dispose();
+        }
     }
 }
